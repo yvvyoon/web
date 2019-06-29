@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rosa's Project</title>
+	<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="javascripts/my.js"></script>
+	<style>
+		* {
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		body {
+			background: #ffc846;
+		}
+		#car-main-title {
+			width: 100%;
+			height: 60px;
+			background: #ffa500;
+			border: 0px solid black;
+			border-radius: 7px 7px 7px 7px / 7px 7px 7px 7px;
+			display: table;
+		}
+		#car-main-title-p {
+			text-align: center;
+			vertical-align: middle;
+			font-size: 30px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			display: table-cell;
+		}
+		#srchBtn {
+			background: #ffa500;
+			border: 0px solid black;
+			font-size: 15px;
+			width: 50px;
+			height: 30px;
+			border-radius: 7px 7px 7px 7px / 7px 7px 7px 7px;
+		}
+		#carNo {
+			font-size: 15px;
+			width: 100%;
+			height: 30px;
+		}
+		#srchType {
+			background: #ffa500;
+			border: 0px solid black;
+			border-radius: 7px 7px 7px 7px / 7px 7px 7px 7px;
+			font-size: 15px;
+			height: 30px;
+		}
+		#carNo {
+			font-family: 'NanumGothic', serif;
+		}
+		table {
+			border: 1px solid black;
+			border-collapse: collapse;
+			/*margin-left: auto;*/
+		}
+		tr, td {
+			border: 1px solid black;
+			width: 200px;
+			height: 40px;
+		}
+		.itmNm {
+			width: 180px;
+			padding-left: 10px;
+		}
+		.itm {
+			width: 300px;
+			padding-left: 10px;
+		}
+		hr {
+			border: solid 0.5px black;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="car-main">
+		<div class="car-main-item" id="car-main-title">
+			<p id="car-main-title-p">자동차 일반 사양 정보 조회</div><br>
+		<div>
+			<select id="srchType" name="srchType">
+				<option selected>조회 타입 선택</option>
+				<option value="0">차량번호</option>
+				<option value="1">차대번호</option>
+			</select>
+		</div><br>
+		<div>
+			<input type="text" name="carNo" id="carNo" placeholder=" 차랑(대)번호를 띄어쓰기없이 입력하세요. 예) 01가1234">
+		</div><br>
+		<div>
+			<button id="srchBtn">조회</button>
+		</div><br><hr><br>
+		<div>조회 결과</div><br>
+		<div id="srchResult">
+			<img src="images/paris.jpg" style="width:500px; height:400px">
+		</div>
+	</div>
+</body>
+</html>
