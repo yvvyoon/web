@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var destination = document.querySelector("#container");
+
+        class Display extends React.Component {
+            render() {
+                // var props = {
+                //     color: "steelblue",
+                //     num: "3.14",
+                //     size: "medium",
+                // };
+
+                return (
+                    <div>
+                        <p>{this.props.color}</p>
+                        <p>{this.props.num}</p>
+                        <p>{this.props.size}</p>
+                    </div>
+                );
+            }
+        }
+
+        class Label extends React.Component {
+            render() {
+                return (
+                    <Display {...this.props} />
+                );
+            }
+        }
+
+        class Shirt extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <Label {...this.props} />
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <div>
+                <Shirt />
+            </div>
+            ,
+            destination
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const cardTag =
+                "        <div id=\"card1\" class=\"card\">\n" +
+                "            <div id=\"square1\" class=\"square\"></div>\n" +
+                "            <p id=\"label1\" class=\"label\">#FFA737</p>\n" +
+                "        </div>" +
+                "        <div id=\"card2\" class=\"card\">\n" +
+                "            <div id=\"square2\" class=\"square\"></div>\n" +
+                "            <p id=\"label2\" class=\"label\">#FF6663</p>\n" +
+                "        </div>" +
+                "        <div id=\"card3\" class=\"card\">\n" +
+                "            <div id=\"square3\" class=\"square\"></div>\n" +
+                "            <p id=\"label3\" class=\"label\">#000000</p>\n" +
+                "        </div>\n";
+
+            $("#container").html(cardTag);
+            $("#square1").css("background-color", "#FFA737");
+            $("#square2").css("background-color", "#FF6663");
+            $("#square3").css("background-color", "#000000");
+        });
+    </script>
+    <style>
+        .card {
+            height: 200px;
+            width: 150px;
+            padding: 0;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 5px #666;
+            display: inline-block;
+            margin: 10px;
+        }
+        .square {
+            height: 150px;
+        }
+        .label {
+            font-family: sans-serif;
+            font-weight: bold;
+            padding: 13px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
