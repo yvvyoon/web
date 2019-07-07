@@ -6,14 +6,21 @@ router.post('/', function(req, res, next) {
         msg: "",
     };
 
-    if(req.session.signupId === req.body.loginId) {
-        req.session.loginState = true;
-        res.redirect('/');
-    } else {
-        loginResult.msg = "다시 로그인하세요.";
-    }
+    console.log(req.session.signupId);
+    console.log(req.body.loginId);
 
-    res.json(JSON.stringify(loginResult));
+    if(req.session.signupId === req.body.loginId) {
+        console.log("로그인 됨");
+
+        req.session.loginState = true;
+        res.redirect("/");
+    } else {
+        console.log("로그인 시발");
+
+        loginResult.msg = "다시 로그인하세요.";
+
+        res.json(JSON.stringify(loginResult));
+    }
 });
 
 module.exports = router;

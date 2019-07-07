@@ -10,27 +10,29 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// app.engine('html', require('ejs').renderFile);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser('@#$%rosarosa'));
+app.use(cookieParser('yvvyoon'));
 app.use(session({
-  resave: true,
-  saveUninitialized: false,
-  secret: '!@#$%rosarosa',
+  resave: false,
+  saveUninitialized: true,
+  secret: 'yvvyoon',
   cookie: {
     httpOnly: true,
     secure: false,
+    // maxAge: 24000 * 60 * 60, // 24시간 쿠키 유지
   },
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/signup', require('./routes/signup'));
+app.use('/srch', require('./routes/srch'));
 
 
 // catch 404 and forward to error handler

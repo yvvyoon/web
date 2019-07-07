@@ -17,7 +17,7 @@ $(document).ready(function() {
         };
 
         $.post('/signup', signupData, function(data, status) {
-            alert(JSON.parse(data.msg));
+            alert(JSON.parse(data).msg);
         });
     });
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
         };
 
         $.post('/login', loginData, function(data, status) {
-            try{
+            try {
                 $("#loginId").val() = "";
             } catch(err) {
                 alert(JSON.parse(data).msg);
@@ -53,9 +53,13 @@ $(document).ready(function() {
         });
     });
 
-    $("#closeBtn").click(function() {
+    $("#loginCloseBtn").click(function() {
         $("#loginModal").hide();
+    });
+
+    $("#signupCloseBtn").click(function() {
         $("#signupModal").hide();
+        $("#loginModal").hide();
     });
 
     $("#signupLink").click(function() {
@@ -65,18 +69,37 @@ $(document).ready(function() {
         });
     });
 
-    $("#backToLogin").click(function() {
-        $("#loginModal").show();
-        $("#signupDiv").fadeOut("fast", function() {
-            $("#loginDiv").fadeIn("fast");
+    // $("#backToLogin").click(function() {
+    //     $("#loginModal").show();
+    //     $("#signupDiv").fadeOut("fast", function() {
+    //         $("#loginDiv").fadeIn("fast");
+    //     });
+    // });
+
+    $("#logoutBtn").click(function() {
+        $.get('/logout', function(data, status) {
+            location.reload();
         });
     });
 
+    $("#srchBtn").click(function() {
+        const popupX = (document.body.offsetWidth / 2) - (200 / 2);
+        const popupY = (document.body.offsetHeight / 2) - (200 / 2);
+        const lotNo = $("#lotNo").val();
+        const srchLotNo = {
+            lotNo,
+        };
 
+        $.post("/srch", srchLotNo, function(data, status) {
+            const srchRslt = JSON.parse(data);
 
+            alert(srchRslt.msg);
+        });
 
-
-
+        $.post("/srch", srchLotNo,
+            window.open("html/history.html", "_blank", "width=1280px; height=960px; left=" + popupX + "top=" + popupY)
+        );
+    });
 
     // $(function() {
     //     $("form[name='login']").validate({
