@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  console.log(req.session.signUpName);
-  console.log(req.session.loginId);
-  console.log(req.session.loginPw);
+  console.log(req.session.userId);
+  console.log(req.session.userPw);
+  console.log(req.session.userName);
+  console.log(req.session.userEmail);
+  console.log(req.session.loginState);
 
   res.render('index', {
-    title: '축잘알',
-    loginState: req.session.loginState,
-    // loggedInName: req.session.loginState,
+    loginState : req.session.loginState,
+    loggedInName : req.session.userId,
   });
 });
 

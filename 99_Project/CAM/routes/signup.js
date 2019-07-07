@@ -6,16 +6,13 @@ router.post('/', function(req, res, next) {
         msg: "",
     };
 
-    req.session.signupId = req.body.signupId;
+    req.session.userId = req.body.userId;
+    req.session.userPw = req.body.userPw;
+    req.session.userName = req.body.userName;
+    req.session.userEmail = req.body.userEmail;
     req.session.loginState = false;
 
-    console.log(req.sessionId);
-    console.log(req.session.signupId);
-    console.log(req.body.signupId);
-    console.log(req.session.loginState);
-    console.log(`${req.body.signupName}님 가입 완료`);
-
-    signupResult.msg = `${req.body.signupName}님 가입 완료`;
+    signupResult.msg = `${req.body.userName}님, 성공적으로 가입되셨습니다.`;
 
     res.json(JSON.stringify(signupResult));
 });

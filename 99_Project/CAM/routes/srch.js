@@ -17,8 +17,6 @@ router.post('/', function(req, res, next) {
     if(req.body.lotNo === histData.lotNo) {
         srchRslt.msg = "조회 성공";
 
-        console.log("맞아용");
-
         window.open("html/history.html", "_blank", "width=1280px; height=960px; left=" + popupX + "top=" + popupY);
 
         res.json(JSON.stringify(srchRslt));

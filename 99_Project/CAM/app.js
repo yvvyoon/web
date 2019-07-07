@@ -22,7 +22,7 @@ app.use(session({
   cookie: {
     httpOnly: true,
     secure: false,
-    // maxAge: 24000 * 60 * 60, // 24시간 쿠키 유지
+    maxAge: 24000 * 60 * 60, // 24시간 쿠키 유지
   },
 }));
 
