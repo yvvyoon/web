@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
                     req.session.loginState = true;
                     console.log("loginState = ", req.session.loginState);
                     console.log("로그인 된 ID : ", req.session.userId);
-                    res.redirect('/');
+                    res.redirect('http://localhost:3000');
                 } else {
                     console.log("로그인 실패");
 

@@ -37,7 +37,7 @@ $(document).ready(function () {
                 $("#loginId").val() = "";
                 $("#loginPw").val() = "";
             } catch(err) {
-                window.location.reload(true);
+                window.location.reload(true, );
             }
         });
     });
