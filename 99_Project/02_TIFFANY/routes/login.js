@@ -3,7 +3,7 @@ var router = express.Router();
 const mysql = require('mysql');
 
 router.post('/', function(req, res, next) {
-    const loginResult = {
+    let loginResult = {
         msg: "",
     };
 
@@ -30,6 +30,8 @@ router.post('/', function(req, res, next) {
                 console.error(err.message);
             } else {
                 if(results[0].USER_ID) {
+                    loginResult.msg = "로그인 성공";
+
                     console.log("results[0] = ", results[0]);
 
                     req.session.userId = results[0].USER_ID;
@@ -41,16 +43,15 @@ router.post('/', function(req, res, next) {
                     req.session.loginState = true;
                     console.log("loginState = ", req.session.loginState);
                     console.log("로그인 된 ID : ", req.session.userId);
-                    res.redirect('http://localhost:3000');
+                    res.json(JSON.stringify(loginResult));
+                    // res.redirect('/');
                 } else {
-                    console.log("로그인 실패");
-
                     loginResult.msg = "ID가 없습니다. 다시 로그인하세요.";
+
+                    console.log("로그인 실패");
 
                     res.json(JSON.stringify(loginResult));
                 }
-
-
             }
 
             conn.end((err) => {

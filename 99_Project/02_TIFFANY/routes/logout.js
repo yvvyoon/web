@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-    if(req.session.userId) {
-        req.session.destroy(function (err) {
-            res.redirect("/");
-        });
+router.get('/', function (req, res, next) {
+    const logoutResult = {
+        msg: "",
+    };
 
-        req.session.loginState = false;
+    if (req.session.userId) {
+        req.session.destroy();
+
+        logoutResult.msg = "ㅎㅇ";
+
+        res.json(JSON.stringify(logoutResult));
     }
 });
 

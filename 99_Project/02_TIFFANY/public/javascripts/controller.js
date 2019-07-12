@@ -9,11 +9,10 @@ $(document).ready(function () {
             userGroup,
         };
 
-        alert(signupId + " : " + signupPw + " : " + userGroup);
-
         $.post("/signup", signupData, function (data, status) {
             const parsedData = JSON.parse(data);
 
+            alert(signupId + " : " + signupPw + " : " + userGroup);
             alert(parsedData.msg);
         });
     });
@@ -26,26 +25,33 @@ $(document).ready(function () {
             loginPw,
         };
 
-        alert(loginId + " : " + loginPw);
-
-        $.post("/login", loginData, function(data, status) {
+        $.post("/login", loginData, function (data, status) {
             const parsedData = JSON.parse(data);
 
+            alert(loginId + " : " + loginPw);
             alert(parsedData.msg);
 
             try {
                 $("#loginId").val() = "";
                 $("#loginPw").val() = "";
             } catch(err) {
-                window.location.reload(true, );
+                window.location.reload(true);
             }
+
+            window.location.reload(true);
+
         });
     });
 
-    $("#logoutBtn").click(function() {
-       $.get("/logout", function(data, status) {
+    $("#logoutBtn").click(function () {
+        alert("ㅅㅂ");
+
+        $.get("/logout", function (data, status) {
             alert("Good bye.");
-       });
+            alert(JSON.parse(data).msg);
+
+            window.location.reload(true);
+        });
     });
 
     // // Initialize Tooltip
