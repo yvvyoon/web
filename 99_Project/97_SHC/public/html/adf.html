@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        $(document).ready(function() {
+            let increasedNumber = $("#number").val();
+
+            $("#increase").click(function*() {
+                function increase() {
+                    increasedNumber += 1;
+
+                    $("#number").html(increasedNumber);
+                }
+            });
+        });
+
+    </script>
+</head>
+    <h1>Counter</h1>
+    <h2 id="number">0</h2>
+    <button id="increase" onclick="increase()">+</button>
+
+<body>
+
+</body>
+</html>
