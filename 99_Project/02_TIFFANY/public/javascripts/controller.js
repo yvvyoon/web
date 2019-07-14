@@ -34,7 +34,7 @@ $(document).ready(function () {
             try {
                 $("#loginId").val() = "";
                 $("#loginPw").val() = "";
-            } catch(err) {
+            } catch (err) {
                 window.location.reload(true);
             }
 
@@ -53,6 +53,50 @@ $(document).ready(function () {
             window.location.reload(true);
         });
     });
+
+    // $("#myInfoUpdateBtn").click(function() {
+    //    alert("내 정보 수정");
+    //
+    //    window.location.assign("/myInfoUpdate");
+    //    // $.get("/myInfoUpdate", function(data, status) {
+    //    //
+    //    // });
+    // });
+    //
+    // $("#eventRegistBtn").click(function () {
+    //     alert("이벤트 등록");
+    //
+    //     window.location.assign("/eventRegist");
+    // });
+
+    $("#eventStart").datetimepicker({
+        language: "ko",
+        pickTime: false,
+        defaultDate: new Date(),
+    });
+
+    $("#eventEnd").datetimepicker({
+        language: "ko",
+        pickTime: false,
+        defaultDate: new Date(),
+    });
+
+    $("#fileInput").on("change", function () {
+        let fileName = "";
+
+        if (window.FileReader) {
+            console.log("FileReader 진입 성공");
+
+            fileName = $(this)[0].files[0].name;
+            console.log("FileReader 진입 성공2");
+        } else {
+            // IE 구버전용
+            fileName = $(this).val().split('/').pop().split('\\').pop();
+        }
+
+        $("#userfile").val(fileName);
+    });
+
 
     // // Initialize Tooltip
     // $('[data-toggle="tooltip"]').tooltip();

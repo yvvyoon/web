@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
 
         console.log("로그인 DB 접속 성공");
 
-        const sql = `SELECT USER_ID, USER_PW FROM USER WHERE 1=1 AND USER_ID = "${req.body.loginId}" AND USER_PW = "${req.body.loginPw}"`;
+        const sql = `SELECT A.USER_ID, A.USER_PW, A.USER_GRP_NUM, B.USER_GRP_NM FROM USER A, USER_GRP B WHERE 1=1 AND A.USER_GRP_NUM = B.USER_GRP_NUM AND A.USER_ID = "${req.body.loginId}" AND USER_PW = "${req.body.loginPw}"`;
 
         console.log(sql);
 
@@ -35,9 +35,12 @@ router.post('/', function(req, res, next) {
                     console.log("results[0] = ", results[0]);
 
                     req.session.userId = results[0].USER_ID;
+                    req.session.userGroup = results[0].USER_GRP_NM;
 
                     console.log(req.session.userId);
                     console.log(results[0].USER_ID);
+                    console.log(results[0].USER_GRP_NUM);
+                    console.log(results[0].USER_GRP_NM);
 
 
                     req.session.loginState = true;

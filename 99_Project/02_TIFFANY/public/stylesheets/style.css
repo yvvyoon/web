@@ -27,9 +27,9 @@ h3, h4 {
 }
 
 .carousel-inner img {
-    -webkit-filter: grayscale(90%);
-    filter: grayscale(90%); /* make all photos black and white */
-    width: 100%; /* Set width to 100% */
+    /*-webkit-filter: grayscale(90%);*/
+    /*filter: grayscale(90%); !* make all photos black and white *!*/
+    width: 50%; /* Set width to 100% */
     margin: auto;
 }
 
@@ -78,16 +78,17 @@ h3, h4 {
 }
 
 .btn {
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
     background-color: #81dbb3;
     color: #fff;
-    border-radius: 0;
+    border-radius: 5px;
     transition: .2s;
+    height: 35px;
 }
 
 .btn:hover, .btn:focus {
-    border: 1px solid #333;
-    background-color: #fff;
+    /*border: 1px solid #333;*/
+    background-color: #68b391;
     color: #fff;
 }
 
@@ -169,7 +170,7 @@ footer a:hover {
 }
 
 .form-control {
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 textarea {
