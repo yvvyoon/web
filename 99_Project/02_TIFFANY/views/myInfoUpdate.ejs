@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="../javascripts/controller.js"></script>
+    <script src="javascripts/controller.js"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -22,19 +22,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#myPage">TIFFANY</a>
+            <a class="navbar-brand" href="/">TIFFANY</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a style="margin-right: -40%;"><span class="glyphicon glyphicon-search"></span></a></li>
                 <li><a><input type="text" id="eventSrchBox" placeholder="이벤트를 검색하세요."></a>
-                    <!--                        <form>-->
-
-                    <!--                        </form>-->
                 </li>
                 <li><a href="#">Sell</a></li>
-                <li><a href="../html/eventRegist.html" id="eventRegistBtn">Regist</a></li>
+                <li><a href="http://localhost:3000/eventRegist" id="eventRegistBtn">Regist</a></li>
                 <li><a href="#">My Page</a></li>
                 <%
                     if(loginState) {
@@ -45,12 +42,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li style="text-align: center;"><%= loggedInUserGroup %></li>
-                            <li><a href="#" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">Logout</a></li>
                         </ul>
                     </li>
-
-
                 <%
                 } else {
                 %>
@@ -74,7 +69,6 @@
                 <h4><span class="glyphicon glyphicon-lock"></span> LOGIN</h4>
             </div>
             <div class="modal-body">
-                <!--                    <form role="form">-->
                 <div class="form-group">
                     <label for="loginId">
                         <span class="glyphicon glyphicon-user"></span> ID
@@ -88,7 +82,6 @@
                 <button type="submit" class="btn btn-block" id="loginBtn">Login
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
-                <!--                    </form>-->
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
@@ -111,7 +104,6 @@
                 <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
             </div>
             <div class="modal-body">
-                <!--                    <form role="form">-->
                 <div class="form-group">
                     <label for="signupId">
                         <span class="glyphicon glyphicon-user"></span> ID
@@ -135,7 +127,6 @@
                 <button type="submit" class="btn btn-block" id="signupBtn">Sign up
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
-                <!--                    </form>-->
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
@@ -158,19 +149,19 @@
                     </label>
                     <input type="password" class="form-control" id="updatePw" placeholder="Enter new password">
                 </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="signupPw">-->
+<!--                        <span class="glyphicon glyphicon-user"></span> Password-->
+<!--                    </label>-->
+<!--                    <input type="password" class="form-control" id="updatePwRepeat" placeholder="Enter new password repeat">-->
+<!--                </div>-->
                 <div class="form-group">
-                    <label for="signupPw">
-                        <span class="glyphicon glyphicon-user"></span> Password
-                    </label>
-                    <input type="password" class="form-control" id="updatePwRepeat" placeholder="Enter new password repeat">
-                </div>
-                <div class="form-group">
-                    <label for="userGroupUpdate">
+                    <label for="updateUserGroup">
                         <span class="glyphicon glyphicon-user"></span> 사용자그룹
                     </label><br>
-                    <input type="radio" name="userGroupUpdate" value="1"> 관리자&nbsp;
-                    <input type="radio" name="userGroupUpdate" value="2"> 이벤트 주최자&nbsp;
-                    <input type="radio" name="userGroupUpdate" value="3"> 이벤트 참가자
+                    <input type="radio" name="updateUserGroup" value="1"> 관리자&nbsp;
+                    <input type="radio" name="updateUserGroup" value="2"> 이벤트 주최자&nbsp;
+                    <input type="radio" name="updateUserGroup" value="3"> 이벤트 참가자
                 </div>
             </div>
 
@@ -178,11 +169,11 @@
             <div class="row">
                 <div class="col-md-6 form-group">
                     <br>
-                    <button class="btn pull-right" type="submit">수정</button>
+                    <button class="btn pull-right" type="submit" id="myInfoUpdateSubmitBtn">수정</button>
                 </div>
                 <div class="col-md-6 form-group">
                     <br>
-                    <button class="btn pull-left" type="submit">취소</button>
+                    <button class="btn pull-left" type="reset">취소</button>
                 </div>
             </div>
         </div>

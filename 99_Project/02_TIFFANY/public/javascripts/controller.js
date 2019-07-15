@@ -39,7 +39,6 @@ $(document).ready(function () {
             }
 
             window.location.reload(true);
-
         });
     });
 
@@ -54,32 +53,71 @@ $(document).ready(function () {
         });
     });
 
-    // $("#myInfoUpdateBtn").click(function() {
-    //    alert("내 정보 수정");
-    //
-    //    window.location.assign("/myInfoUpdate");
-    //    // $.get("/myInfoUpdate", function(data, status) {
-    //    //
-    //    // });
-    // });
-    //
-    // $("#eventRegistBtn").click(function () {
-    //     alert("이벤트 등록");
-    //
-    //     window.location.assign("/eventRegist");
-    // });
+    $("#eventRegistSubmitBtn").click(function () {
+        const eventName = $("#eventName").val();
+        const eventStart = $("#eventStart").val();
+        const eventEnd = $("#eventEnd").val();
+        const eventPlace = $("#eventPlace").val();
+        const eventArea = $("#eventArea").val();
+        const priceLimit = $("#priceLimit").val();
+        const fileInput = $("#fileInput").val();
+        const eventDesc = $("#eventDesc").val();
+        const eventRegistData = {
+            eventName,
+            eventStart,
+            eventEnd,
+            eventPlace,
+            eventArea,
+            priceLimit,
+            fileInput,
+            eventDesc,
+        };
+        let registYn = true;
 
-    $("#eventStart").datetimepicker({
-        language: "ko",
-        pickTime: false,
-        defaultDate: new Date(),
+        $.post("/eventRegist", eventRegistData, function (data, status) {
+            const parsedData = JSON.parse(data);
+
+            alert(parsedData.msg);
+
+            registYn = confirm("계속해서 이벤트를 등록하시겠어요?");
+
+            // 이벤트를 계속 등록한다면 이벤트 등록 페이지 다시 호출, 아니면 index로 이동
+            if (registYn) {
+                window.location.reload(true);
+            } else {
+                window.location.href = "/";
+            }
+        });
     });
 
-    $("#eventEnd").datetimepicker({
-        language: "ko",
-        pickTime: false,
-        defaultDate: new Date(),
+    $("#myInfoUpdateSubmitBtn").click(function () {
+        const updatePw = $("#updatePw").val();
+        const updateUserGroup = $("input[name='updateUserGroup']:checked").val();
+        const myInfoUpdateData = {
+            updatePw,
+            updateUserGroup,
+        };
+
+        $.post("/myInfoUpdate", myInfoUpdateData, function (data, status) {
+             const parsedData = JSON.parse(data);
+
+             alert(parsedData.msg);
+
+            window.location.href = "/";
+        });
     });
+
+    // $("#eventStart").datetimepicker({
+    //     language: "ko",
+    //     pickTime: false,
+    //     defaultDate: new Date(),
+    // });
+    //
+    // $("#eventEnd").datetimepicker({
+    //     language: "ko",
+    //     pickTime: false,
+    //     defaultDate: new Date(),
+    // });
 
     $("#fileInput").on("change", function () {
         let fileName = "";

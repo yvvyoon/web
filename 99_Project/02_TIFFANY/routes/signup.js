@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mysql = require('mysql');
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
     const signupResult = {
         msg: "",
     };
@@ -15,7 +15,7 @@ router.post('/', function(req, res, next) {
     });
 
     conn.connect((err) => {
-        if(err) {
+        if (err) {
             console.error(err.message);
         }
 
@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
         console.log(sql);
 
         conn.query(sql, (err, results, fields) => {
-            if(err) {
+            if (err) {
                 console.error(err.message);
             } else {
                 console.log("가입 성공");
@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
         });
 
         conn.end((err) => {
-            if(err) {
+            if (err) {
                 console.error(err.message);
             }
         });
