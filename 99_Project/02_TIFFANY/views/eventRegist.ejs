@@ -141,7 +141,7 @@
     <div class="container">
         <h3 class="text-center">이벤트 등록</h3>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="row">
                     <!-- 이벤트 이름 -->
                     <div class="col-sm-12 form-group">
@@ -150,12 +150,12 @@
 
                     <!-- 이벤트 시작일자 -->
                     <div class="col-sm-6 form-group">
-                        <input class="form-control" id="eventStart" name="email" placeholder="이벤트 시작" type="text" required>
+                        <input class="form-control" id="eventStart" name="email" placeholder="이벤트 시작" type="datetime-local" required>
                     </div>
 
                     <!-- 이벤트 종료일자 -->
                     <div class="col-sm-6 form-group">
-                        <input class="form-control" id="eventEnd" name="email" placeholder="이벤트 종료" type="text" required>
+                        <input class="form-control" id="eventEnd" name="email" placeholder="이벤트 종료" type="datetime-local" required>
                     </div>
 
                     <!-- 이벤트 장소 -->
@@ -168,7 +168,17 @@
                         <input class="form-control" id="eventArea" name="name" placeholder="이벤트 지역" type="text" required>
                     </div>
 
-                    <!-- 이벤트 상한가 -->
+                    <!-- 티켓 발행 수량 -->
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="ticketIssueQty" name="name" placeholder="티켓 발행 수량" type="text" required>
+                    </div>
+
+                    <!-- 판매 원가 -->
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="saleOrgPrc" name="name" placeholder="판매 원가" type="text" required>
+                    </div>
+
+                    <!-- 티켓 상한가 -->
                     <div class="col-sm-12 form-group input-append spinner" data-trigger="spinner">
                         <input class="form-control" id="priceLimit" name="name" placeholder="상한가" type="text" value="1" data-rule="quantity">
                         <div class="add-on">

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // 회원가입
     $("#signupBtn").click(function () {
         const signupId = $("#signupId").val();
         const signupPw = $("#signupPw").val();
@@ -11,12 +12,10 @@ $(document).ready(function () {
 
         $.post("/signup", signupData, function (data, status) {
             const parsedData = JSON.parse(data);
-
-            alert(signupId + " : " + signupPw + " : " + userGroup);
-            alert(parsedData.msg);
         });
     });
 
+    // 로그인
     $("#loginBtn").click(function () {
         const loginId = $("#loginId").val();
         const loginPw = $("#loginPw").val();
@@ -28,9 +27,7 @@ $(document).ready(function () {
         $.post("/login", loginData, function (data, status) {
             const parsedData = JSON.parse(data);
 
-            alert(loginId + " : " + loginPw);
-            alert(parsedData.msg);
-
+            // 로그인 실패 시
             try {
                 $("#loginId").val() = "";
                 $("#loginPw").val() = "";
@@ -38,27 +35,28 @@ $(document).ready(function () {
                 window.location.reload(true);
             }
 
-            window.location.reload(true);
+            alert(parsedData.msg);
+
+            // window.location.reload(true);
         });
     });
 
+    // 로그아웃
     $("#logoutBtn").click(function () {
-        alert("ㅅㅂ");
-
         $.get("/logout", function (data, status) {
-            alert("Good bye.");
-            alert(JSON.parse(data).msg);
-
             window.location.reload(true);
         });
     });
 
+    // 이벤트 등록
     $("#eventRegistSubmitBtn").click(function () {
         const eventName = $("#eventName").val();
         const eventStart = $("#eventStart").val();
         const eventEnd = $("#eventEnd").val();
         const eventPlace = $("#eventPlace").val();
         const eventArea = $("#eventArea").val();
+        const ticketIssueQty = $("#ticketIssueQty").val();
+        const saleOrgPrc = $("#saleOrgPrc").val();
         const priceLimit = $("#priceLimit").val();
         const fileInput = $("#fileInput").val();
         const eventDesc = $("#eventDesc").val();
@@ -68,10 +66,13 @@ $(document).ready(function () {
             eventEnd,
             eventPlace,
             eventArea,
+            ticketIssueQty,
+            saleOrgPrc,
             priceLimit,
             fileInput,
             eventDesc,
         };
+        // 추가 등록 여부 변수
         let registYn = true;
 
         $.post("/eventRegist", eventRegistData, function (data, status) {
@@ -90,6 +91,7 @@ $(document).ready(function () {
         });
     });
 
+    // 내 정보 수정
     $("#myInfoUpdateSubmitBtn").click(function () {
         const updatePw = $("#updatePw").val();
         const updateUserGroup = $("input[name='updateUserGroup']:checked").val();
@@ -107,18 +109,7 @@ $(document).ready(function () {
         });
     });
 
-    // $("#eventStart").datetimepicker({
-    //     language: "ko",
-    //     pickTime: false,
-    //     defaultDate: new Date(),
-    // });
-    //
-    // $("#eventEnd").datetimepicker({
-    //     language: "ko",
-    //     pickTime: false,
-    //     defaultDate: new Date(),
-    // });
-
+    // 파일 저장
     $("#fileInput").on("change", function () {
         let fileName = "";
 
