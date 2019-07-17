@@ -23,7 +23,7 @@ router.post('/', function (req, res, next) {
         console.log("로그인 DB 접속 성공");
 
         const sql1 = "SELECT USER_ID FROM USER";
-        const sql2 = `SELECT A.USER_ID, A.USER_PW, A.USER_GRP_NUM, B.USER_GRP_NM FROM USER A, USER_GRP B WHERE 1=1 AND A.USER_GRP_NUM = B.USER_GRP_NUM AND A.USER_ID = "${req.body.loginId}" AND USER_PW = "${req.body.loginPw}"`;
+        const sql2 = `SELECT A.USER_ID, A.USER_PW, A.USER_GRP_NUM, A.USER_NUM, B.USER_GRP_NM FROM USER A, USER_GRP B WHERE 1=1 AND A.USER_GRP_NUM = B.USER_GRP_NUM AND A.USER_ID = "${req.body.loginId}" AND USER_PW = "${req.body.loginPw}"`;
 
         console.log(sql1);
         console.log(sql2);
@@ -70,7 +70,9 @@ router.post('/', function (req, res, next) {
                                 loginResult.msg = "로그인 성공";
 
                                 req.session.userId = results[0].USER_ID;
+                                req.session.userGroupNum = results[0].USER_GRP_NUM;
                                 req.session.userGroup = results[0].USER_GRP_NM;
+                                req.session.userNum = results[0].USER_NUM;
                                 req.session.loginState = true;
 
                                 res.json(JSON.stringify(loginResult));

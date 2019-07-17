@@ -27,31 +27,64 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a style="margin-right: -40%;"><span class="glyphicon glyphicon-search"></span></a></li>
-                <li><a><input type="text" id="eventSrchBox" placeholder="이벤트를 검색하세요."></a>
+                    <a style="margin-right: -40%;"><span class="glyphicon glyphicon-search"></span></a>
                 </li>
-                <li><a href="#">Sell</a></li>
-                <li><a href="http://localhost:3000/eventRegist" id="eventRegistBtn">Regist</a></li>
-                <li><a href="#">My Page</a></li>
+                <li>
+                    <a><input type="text" id="eventSrchBox" placeholder="이벤트, 팀, 아티스트"></a>
+                </li>
                 <%
-                    if(loginState) {
+                    if (loginState) {
+                        // 이벤트 주최자일 때
+                        if (loggedInUserGroupNum === 2) {
                 %>
+                <li><a href="http://localhost:3000/eventRegist" id="eventRegistBtn">REGISTER</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="loginDropdown">
+                        <li><%= loggedInUserGroup %></li>
+                        <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                        <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                    </ul>
+                </li>
+                <%
+                        // 이벤트 참가자일 때
+                        } else if (loggedInUserGroupNum === 3) {
+                %>
+                <li><a href="#">SELL</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="loginDropdown">
+                        <li><%= loggedInUserGroup %></li>
+                        <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                        <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                    </ul>
+                </li>
+                <%
+                        // 관리자일 때
+                        } else {
+                %>
+                    <li><a href="#">ADMIN</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li style="text-align: center;"><%= loggedInUserGroup %></li>
+                        <ul class="dropdown-menu" id="loginDropdown">
+                            <li><%= loggedInUserGroup %></li>
                             <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">Logout</a></li>
+                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
                 <%
-                } else {
+                        }
+                    } else {
                 %>
-                    <li><a href="#" role="button" data-toggle="modal" data-target="#loginModal">Login</a></li>
+                    <li><a href="#" role="button" data-toggle="modal" data-target="#loginModal">LOGIN</a></li>
                 <%
-                }
+                    }
                 %>
             </ul>
         </div>
@@ -84,7 +117,7 @@
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                <button type="submit" class="btn pull-left" data-dismiss="modal">
                     <span class="glyphicon glyphicon-remove"></span> Cancel
                 </button>
                 <p>처음이신가요? <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
@@ -129,7 +162,7 @@
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                <button type="submit" class="btn pull-left" data-dismiss="modal">
                     <span class="glyphicon glyphicon-remove"></span> Cancel
                 </button>
             </div>
@@ -139,7 +172,7 @@
 
 <!-- Update My Info -->
 <div class="container">
-    <h3 class="text-center">내 정보 수정</h3>
+    <h3 class="text-center" style="color: #000;">내 정보 수정</h3>
     <div class="row test">
         <div class="col-md-12">
             <div class="row">
@@ -159,9 +192,9 @@
                     <label for="updateUserGroup">
                         <span class="glyphicon glyphicon-user"></span> 사용자그룹
                     </label><br>
-                    <input type="radio" name="updateUserGroup" value="1"> 관리자&nbsp;
-                    <input type="radio" name="updateUserGroup" value="2"> 이벤트 주최자&nbsp;
-                    <input type="radio" name="updateUserGroup" value="3"> 이벤트 참가자
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="1">&nbsp;&nbsp;관리자<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
                 </div>
             </div>
 

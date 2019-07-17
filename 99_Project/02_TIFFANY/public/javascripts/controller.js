@@ -12,6 +12,8 @@ $(document).ready(function () {
 
         $.post("/signup", signupData, function (data, status) {
             const parsedData = JSON.parse(data);
+
+            alert(parsedData.msg);
         });
     });
 
@@ -101,9 +103,9 @@ $(document).ready(function () {
         };
 
         $.post("/myInfoUpdate", myInfoUpdateData, function (data, status) {
-             const parsedData = JSON.parse(data);
+            const parsedData = JSON.parse(data);
 
-             alert(parsedData.msg);
+            alert(parsedData.msg);
 
             window.location.href = "/";
         });
@@ -124,6 +126,31 @@ $(document).ready(function () {
         }
 
         $("#userfile").val(fileName);
+    });
+
+    // Football 이미지 클릭
+    $("#footballImg").click(function () {
+       alert("Football");
+    });
+
+    // Basketball 이미지 클릭
+    $("#basketballImg").click(function () {
+        alert("준비 중입니다.");
+    });
+
+    // Baseball 이미지 클릭
+    $("#baseballImg").click(function () {
+        alert("준비 중입니다.");
+    });
+
+    // Concert 이미지 클릭
+    $("#concertImg").click(function () {
+        alert("준비 중입니다.");
+    });
+
+    // Musical 이미지 클릭
+    $("#musicalImg").click(function () {
+        alert("준비 중입니다.");
     });
 
 

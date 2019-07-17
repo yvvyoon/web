@@ -7,6 +7,7 @@ router.get('/', function (req, res, next) {
         loginState: req.session.loginState,
         loggedInId: req.session.userId,
         loggedInUserGroup: req.session.userGroup,
+        loggedInUserGroupNum: req.session.userGroupNum,
     });
 
     console.log("myInfoUpdate");
