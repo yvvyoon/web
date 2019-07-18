@@ -29,17 +29,15 @@ $(document).ready(function () {
         $.post("/login", loginData, function (data, status) {
             const parsedData = JSON.parse(data);
 
-            // 로그인 실패 시
-            try {
-                $("#loginId").val() = "";
-                $("#loginPw").val() = "";
-            } catch (err) {
+            // 입력한 ID가 있을 때
+            if (parsedData.flag === true) {
+                alert(parsedData.msg);
+
                 window.location.reload(true);
+            // 입력한 ID가 없을 때
+            } else {
+                alert(parsedData.msg);
             }
-
-            alert(parsedData.msg);
-
-            // window.location.reload(true);
         });
     });
 
@@ -60,7 +58,7 @@ $(document).ready(function () {
         const ticketIssueQty = $("#ticketIssueQty").val();
         const saleOrgPrc = $("#saleOrgPrc").val();
         const priceLimit = $("#priceLimit").val();
-        const fileInput = $("#fileInput").val();
+        // const filePath = $("#filePath").val();
         const eventDesc = $("#eventDesc").val();
         const eventRegistData = {
             eventName,
@@ -71,7 +69,7 @@ $(document).ready(function () {
             ticketIssueQty,
             saleOrgPrc,
             priceLimit,
-            fileInput,
+            // new_filepath,
             eventDesc,
         };
         // 추가 등록 여부 변수
@@ -111,26 +109,9 @@ $(document).ready(function () {
         });
     });
 
-    // 파일 저장
-    $("#fileInput").on("change", function () {
-        let fileName = "";
-
-        if (window.FileReader) {
-            console.log("FileReader 진입 성공");
-
-            fileName = $(this)[0].files[0].name;
-            console.log("FileReader 진입 성공2");
-        } else {
-            // IE 구버전용
-            fileName = $(this).val().split('/').pop().split('\\').pop();
-        }
-
-        $("#userfile").val(fileName);
-    });
-
     // Football 이미지 클릭
     $("#footballImg").click(function () {
-       alert("Football");
+        alert("Football");
     });
 
     // Basketball 이미지 클릭

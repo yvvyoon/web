@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const mysql = require('mysql');
-const formidable = require('formidable');
 
 router.get("/", function (req, res, next) {
     res.render("eventRegist", {
@@ -33,8 +32,8 @@ router.post('/', function (req, res, next) {
         console.log("이벤트 등록 DB 접속 성공");
 
         // 이벤트 등록 쿼리
-        const eventRegistSql = `INSERT INTO EVENT(EVENT_NM, EVENT_OPNR_NUM1, EVENT_OPNR_NUM2, EVENT_STRT_DTTM, EVENT_END_DTTM, EVENT_OCCR_PLC_NM, EVENT_OCCR_AREA_NM, TICKET_ISSUE_QTY, SALE_ORG_PRC, LIMIT_RT, EVENT_IMG, EVENT_DESC)
-VALUES("${req.body.eventName}", ${req.session.userNum}, ${req.session.userNum}, "${req.body.eventStart}", "${req.body.eventEnd}", "${req.body.eventPlace}", "${req.body.eventArea}", ${req.body.ticketIssueQty}, ${req.body.saleOrgPrc}, ${req.body.priceLimit}, "${req.body.fileInput}", "${req.body.eventDesc}")`;
+        const eventRegistSql = `INSERT INTO EVENT(EVENT_NM, EVENT_OPNR_NUM1, EVENT_OPNR_NUM2, EVENT_STRT_DTTM, EVENT_END_DTTM, EVENT_OCCR_PLC_NM, EVENT_OCCR_AREA_NM, TICKET_ISSUE_QTY, SALE_ORG_PRC, LIMIT_RT, EVENT_IMG_PATH, EVENT_DESC)
+VALUES("${req.body.eventName}", ${req.session.userNum}, ${req.session.userNum}, "${req.body.eventStart}", "${req.body.eventEnd}", "${req.body.eventPlace}", "${req.body.eventArea}", ${req.body.ticketIssueQty}, ${req.body.saleOrgPrc}, ${req.body.priceLimit}, "sample", "${req.body.eventDesc}")`;
 
         conn.query(eventRegistSql, (err, results, fields) => {
             if (err) {

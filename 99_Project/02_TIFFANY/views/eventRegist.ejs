@@ -12,6 +12,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="javascripts/controller.js"></script>
+<!--    <script>-->
+<!--        bufferSave = () => {-->
+<!--            const fileInput = document.getElementById("fileInput").files[0];-->
+<!--            const xhr = new XMLHttpRequest();-->
+<!--            const formData = new FormData();-->
+
+<!--            formData.append("img", fileInput);-->
+
+<!--            xhr.onload = function() {-->
+<!--                if (xhr.status === 200 || xhr.status === 201) {-->
+<!--                    console.log(xhr.responseText);-->
+<!--                } else {-->
+<!--                    console.error(xhr.responseText);-->
+<!--                }-->
+<!--            };-->
+
+<!--            xhr.open("POST", "/imgUpload");-->
+<!--            xhr.setRequestHeader("Content-Type", "multipart/form-data");-->
+<!--            xhr.send(formData);-->
+
+<!--            console.log("fileInput : " + fileInput);-->
+<!--            console.log("formData : " + formData);-->
+<!--        }-->
+<!--    </script>-->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -24,25 +48,25 @@
                 </button>
                 <a class="navbar-brand" href="/">TIFFANY</a>
             </div>
+            <div class="navbar-header" style="height: 50px; display: inline-block">
+                <a><input type="text" id="eventSrchBox" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; margin-top: 5px; margin-bottom: 5px;" placeholder="이벤트, 팀, 아티스트"></a>
+                <a><span class="glyphicon glyphicon-search" id="srchGlass" style="; font-size: 2em; width:50px; height:40px;"></span></a>
+            </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a style="margin-right: -40%;"><span class="glyphicon glyphicon-search"></span></a></li>
-                        <li><a><input type="text" id="eventSrchBox" placeholder="이벤트, 팀, 아티스트"></a>
-                    </li>
                     <%
                         if (loginState) {
                             // 이벤트 주최자일 때
                             if (loggedInUserGroupNum === 2) {
                     %>
-                    <li><a href="http://localhost:3000/eventRegist" id="eventRegistBtn">REGISTER</a></li>
+                    <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
                             <li><%= loggedInUserGroup %></li>
-                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
@@ -52,12 +76,12 @@
                     %>
                     <li><a href="#">SELL</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
                             <li><%= loggedInUserGroup %></li>
-                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
@@ -67,12 +91,12 @@
                     %>
                     <li><a href="#">ADMIN</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
                             <li><%= loggedInUserGroup %></li>
-                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
@@ -222,31 +246,29 @@
                         </div>
                     </div>
 
-                    <!-- 이벤트 이미지 업로드 -->
-                    <div class="col-sm-12 form-group">
-                        <input id="fileInput" filestyle="" type="file" data-class-button="btn btn-default"
-                               data-class-input="form-control" data-button-text="" data-icon-name="fa fa-upload"
-                               class="form-control" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
-                        <div class="bootstrap-filestyle input-group">
-                            <input type="text" id="userfile" class="form-control" name="userfile" disabled="">
-                            <span class="group-span-filestyle input-group-btn" tabindex="0">
-                            <label for="fileInput" class="btn btn-default ">
-                                <span class="glyphicon fa fa-upload"></span>
-                            </label>
-                        </span>
-                        </div>
-                    </div>
+
                 </div>
 
                 <!-- 이벤트 설명 -->
                 <textarea class="form-control" id="eventDesc" name="comments" placeholder="이벤트 설명" rows="5"></textarea>
+                <br>
+
+
 
                 <!-- 이벤트 등록 및 취소 -->
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        <br>
-                        <button class="btn pull-right" type="submit" id="eventRegistSubmitBtn">등록</button>
-                    </div>
+                    <!-- 이벤트 이미지 업로드 -->
+                    <form action="/imgUpload" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-12 form-group">
+                            <div class="field form">
+                                <input type="file" id="fileInput" name="imgName"><br>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <br>
+                            <button class="btn pull-right" id="eventRegistSubmitBtn">등록</button>
+                        </div>
+                    </form>
                     <div class="col-md-6 form-group">
                         <br>
                         <button class="btn pull-left" type="reset">취소</button>

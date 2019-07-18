@@ -46,12 +46,10 @@ router.post('/', function (req, res, next) {
                 console.log("idCnt = ", idCnt);
 
                 if (idCnt === 0) {
-                    console.log("ID가 없습니다. 다시 로그인하세요.");
-
                     loginResult.flag = false;
                     loginResult.msg = "ID가 없습니다. 다시 로그인하세요.";
 
-                    // res.json(JSON.stringify(loginResult));
+                    res.json(JSON.stringify(loginResult));
                 } else {
                     conn.query(sql2, (err, results, fields) => {
                         if (err) {
@@ -73,10 +71,11 @@ router.post('/', function (req, res, next) {
                                 req.session.userGroupNum = results[0].USER_GRP_NUM;
                                 req.session.userGroup = results[0].USER_GRP_NM;
                                 req.session.userNum = results[0].USER_NUM;
+                                req.session.filePath = results[0].EVENT_IMG_PATH;
                                 req.session.loginState = true;
-
-                                res.json(JSON.stringify(loginResult));
                             }
+
+                            res.json(JSON.stringify(loginResult));
                         }
 
                         conn.end((err) => {
@@ -86,6 +85,8 @@ router.post('/', function (req, res, next) {
                         });
                     });
                 }
+
+
             }
         });
     });

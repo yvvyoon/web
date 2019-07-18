@@ -24,25 +24,25 @@
 <!--                </button>-->
                 <a class="navbar-brand" href="/">TIFFANY</a>
             </div>
+            <div class="navbar-header" style="height: 50px; display: inline-block">
+                <a><input type="text" id="eventSrchBox" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; margin-top: 5px; margin-bottom: 5px;" placeholder="이벤트, 팀, 아티스트"></a>
+                <a><span class="glyphicon glyphicon-search" id="srchGlass" style="; font-size: 2em; width:50px; height:40px;"></span></a>
+            </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a style="margin-right: -40%;"><span class="glyphicon glyphicon-search"></span></a></li>
-                        <li><a><input type="text" id="eventSrchBox" placeholder="이벤트, 팀, 아티스트"></a>
-                    </li>
                     <%
                         if (loginState) {
                             // 이벤트 주최자일 때
                             if (loggedInUserGroupNum === 2) {
                     %>
-                    <li><a href="http://localhost:3000/eventRegist" id="eventRegistBtn">REGISTER</a></li>
+                    <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
                             <li><%= loggedInUserGroup %></li>
-                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
@@ -52,12 +52,12 @@
                     %>
                     <li><a href="#">SELL</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
                             <li><%= loggedInUserGroup %></li>
-                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
@@ -67,12 +67,12 @@
                     %>
                     <li><a href="#">ADMIN</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
                             <li><%= loggedInUserGroup %></li>
-                            <li><a href="http://localhost:3000/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
                         </ul>
                     </li>
@@ -183,27 +183,25 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="images/milano_derby.jpg" alt="New York" width="1200" height="700">
-                <div class="carousel-caption">
-                    <h3>Milano Derby</h3>
-                    <p>Get tickets</p>
-                </div>
+                <img src="images/campnou.jpg" alt="Camp Nou">
+<!--                <div class="carousel-caption">-->
+<!--                    <h3>Milano Derby</h3>-->
+<!--                    <p>Get tickets</p>-->
+<!--                </div>-->
             </div>
-
             <div class="item">
-                <img src="images/north_london_derby.jpg" alt="Chicago" width="1200" height="700">
-                <div class="carousel-caption">
-                    <h3>North London Derby</h3>
-                    <p>Get tickets</p>
-                </div>
+                <img src="images/bernabeu.jpg" alt="Santiago Bernabeu">
+<!--                <div class="carousel-caption">-->
+<!--                    <h3>North London Derby</h3>-->
+<!--                    <p>Get tickets</p>-->
+<!--                </div>-->
             </div>
-
             <div class="item">
-                <img src="images/el_clasico.jpeg" alt="Los Angeles" width="1200" height="700">
-                <div class="carousel-caption">
-                    <h3>El Clasico</h3>
-                    <p>Get tickets</p>
-                </div>
+                <img src="images/wanda.jpg" alt="Wanda Metropolitano">
+<!--                <div class="carousel-caption">-->
+<!--                    <h3>El Clasico</h3>-->
+<!--                    <p>Get tickets</p>-->
+<!--                </div>-->
             </div>
         </div>
 
