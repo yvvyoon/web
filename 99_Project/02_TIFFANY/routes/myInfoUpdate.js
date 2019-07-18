@@ -8,6 +8,7 @@ router.get('/', function (req, res, next) {
         loggedInId: req.session.userId,
         loggedInUserGroup: req.session.userGroup,
         loggedInUserGroupNum: req.session.userGroupNum,
+        tokenQty: req.session.tokenQty,
     });
 
     console.log("myInfoUpdate");

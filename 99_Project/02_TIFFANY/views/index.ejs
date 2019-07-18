@@ -17,16 +17,25 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-<!--                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                </button>-->
                 <a class="navbar-brand" href="/">TIFFANY</a>
             </div>
             <div class="navbar-header" style="height: 50px; display: inline-block">
-                <a><input type="text" id="eventSrchBox" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; margin-top: 5px; margin-bottom: 5px;" placeholder="이벤트, 팀, 아티스트"></a>
-                <a><span class="glyphicon glyphicon-search" id="srchGlass" style="; font-size: 2em; width:50px; height:40px;"></span></a>
+                <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
+                    <table>
+                        <tr>
+                            <td style=" margin-top: 5px; margin-bottom: 5px;">
+                            <span style=" margin-bottom: 5px;">
+                                <input name="searchEvent" type="text" id="searchEvent" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; " placeholder="이벤트 키워드를 입력하세요.">
+                            </span>
+                            </td>
+                            <td style=" margin-bottom: 5px;">
+                            <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
+                                <button class="glyphicon glyphicon-search" id="srchGlass" style="font-size: 2em; width:50px; height:40px;"></button>
+                            </span>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -41,24 +50,32 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
+                            <br>
                             <li><%= loggedInUserGroup %></li>
+                            <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+                            <hr>
                             <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                            <br>
                         </ul>
                     </li>
                     <%
                         // 이벤트 참가자일 때
                             } else if (loggedInUserGroupNum === 3) {
                     %>
-                    <li><a href="#">SELL</a></li>
+                    <li><a href="/pay">SELL</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
+                            <br>
                             <li><%= loggedInUserGroup %></li>
+                            <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+                            <hr>
                             <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                            <br>
                         </ul>
                     </li>
                     <%
@@ -71,16 +88,19 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
+                            <br>
                             <li><%= loggedInUserGroup %></li>
+                            <hr>
                             <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
                             <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                            <br>
                         </ul>
                     </li>
                     <%
                             }
                         } else {
                     %>
-                    <li><a href="#" role="button" data-toggle="modal" data-target="#loginModal">LOGIN</a></li>
+                    <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
                     <%
                         }
                     %>
@@ -170,7 +190,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -311,7 +330,6 @@
         </div>
     </div>
 
-
     <!-- Footer -->
     <footer class="text-center">
         <a class="up-arrow" href="#" data-toggle="tooltip" title="TO TOP">
@@ -319,51 +337,5 @@
         </a><br><br>
         <p>Copyright 2019. Team TIFFANY. All rights reserved.</p>
     </footer>
-
-
-    <!-- Container (The Band Section) -->
-<!--    <div id="band" class="container text-center">-->
-<!--        <h3>blah blah</h3>-->
-<!--        <p><em>blah blah</em></p>-->
-<!--        <p>blah blah</p>-->
-<!--        <br>-->
-<!--        <div class="row">-->
-<!--            <div class="col-sm-4">-->
-<!--                <p class="text-center"><strong>Name</strong></p><br>-->
-<!--                <a href="#demo" data-toggle="collapse">-->
-<!--&lt;!&ndash;                    <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">&ndash;&gt;-->
-<!--                </a>-->
-<!--                <div id="demo" class="collapse">-->
-<!--                    <p>blah blah</p>-->
-<!--                    <p>blah blah</p>-->
-<!--                    <p>blah blah</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-sm-4">-->
-<!--                <p class="text-center"><strong>Name</strong></p><br>-->
-<!--                <a href="#demo2" data-toggle="collapse">-->
-<!--&lt;!&ndash;                    <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">&ndash;&gt;-->
-<!--                </a>-->
-<!--                <div id="demo2" class="collapse">-->
-<!--                    <p>Drummer</p>-->
-<!--                    <p>Loves drummin'</p>-->
-<!--                    <p>Member since 1988</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-sm-4">-->
-<!--                <p class="text-center"><strong>Name</strong></p><br>-->
-<!--                <a href="#demo3" data-toggle="collapse">-->
-<!--&lt;!&ndash;                    <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">&ndash;&gt;-->
-<!--                </a>-->
-<!--                <div id="demo3" class="collapse">-->
-<!--                    <p>Bass player</p>-->
-<!--                    <p>Loves math</p>-->
-<!--                    <p>Member since 2005</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
 </body>
 </html>

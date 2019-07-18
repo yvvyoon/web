@@ -1,17 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const formidable = require("formidable");
-const multer = require("multer");
-const upload = multer({
-    dest: "uploads/",
-});
 const fs = require("fs");
 
-fs.readdir("public/upload", (error) => {
+fs.readdir("public/upload/", (error) => {
     if (error) {
         console.error("upload 디렉토리가 없어 생성합니다.");
 
-        fs.mkdirSync("public/upload");
+        fs.mkdirSync("public/upload/");
     }
 });
 
@@ -22,25 +18,40 @@ router.post("/", (req, res) => {
 
     const form = new formidable.IncomingForm();
 
-    form.parse(req, function (err, fields, files) {
-        const oldImgPath = files.imgName.path;
-        const newImgPath = 'public/upload/' + req.session.userId + '_' + files.imgName.name;
+    console.log("?");
 
-        req.session.newImgPath = newImgPath;
+    form.encoding = 'utf-8';
+    form.uploadDir = 'public/upload/';
+    form.multiples = true;
+    form.keepExtensions = true;
 
-        console.log("newImgPath : " + newImgPath);
-        console.log("req.session.newImgPath : " + req.session.newImgPath);
-        console.log("req.session.userId : " + req.session.userId);
+    console.log("??");
 
-        fs.rename(oldImgPath, newImgPath, function (err) {
-            if (err) {
-                throw err;
-            }
+    let host = req.protocol + '://' + req.get('host');
 
-            // res.redirect("/eventRegist");
-            // res.end();
-        });
+    console.log("req.protocol : " + req.protocol);
+    console.log("req.get('host') : " + req.get("host"));
+
+    let uploadResultUrl = "";
+
+    console.log("???");
+
+    form.on('file', function (field, file) {
+        console.log("????");
+
+        fs.rename(file.path, form.uploadDir + '/' + file.name);
+
+        uploadResultUrl = `${host}/upload/${file.name}`;
     });
+
+    // form.parse(req, function (err, field, files) {
+    //     console.log("?????");
+    //     console.log(files);
+    //
+    //     return res.json({
+    //         uploadResult: uploadResultUrl,
+    //     });
+    // })
 });
 
 module.exports = router;

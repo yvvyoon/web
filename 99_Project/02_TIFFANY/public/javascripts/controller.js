@@ -44,7 +44,7 @@ $(document).ready(function () {
     // 로그아웃
     $("#logoutBtn").click(function () {
         $.get("/logout", function (data, status) {
-            window.location.reload(true);
+            window.location.href = "/";
         });
     });
 
@@ -105,13 +105,43 @@ $(document).ready(function () {
 
             alert(parsedData.msg);
 
-            window.location.href = "/";
+            window.location.href = "/login";
         });
     });
 
+    // 탈퇴
+    let withdrawYn1 = false;
+    let withdrawYn2 = false;
+    let withdrawYn3 = false;
+
+    $("#withdrawBtn").click(function () {
+        withdrawYn1 = confirm("탈퇴하실건가요?");
+
+        if (withdrawYn1) {
+            withdrawYn2 = confirm("진지하게?");
+
+            if (withdrawYn2) {
+                withdrawYn3 = confirm("아 진짜로?");
+
+                if (withdrawYn3) {
+                    $.get("/withdraw", (data, status) => {
+                        const parsedData = JSON.parse(data);
+
+                        alert(parsedData.msg);
+
+                        window.location.href = "/";
+                    });
+                }
+            }
+        } else {
+            window.location.href = "/myInfoUpdate";
+        }
+    });
+
+
     // Football 이미지 클릭
     $("#footballImg").click(function () {
-        alert("Football");
+        window.location.href = "/searchEventInfo";
     });
 
     // Basketball 이미지 클릭

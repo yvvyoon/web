@@ -21,8 +21,9 @@ h5 {
     font-size: 30px;
 }
 
-.container {
+.container-event {
     padding: 80px 120px;
+    height: 300px;
 }
 
 .person:hover {
@@ -59,7 +60,7 @@ h5 {
 
 .bg-1 {
     /*background: #81dbb3;*/
-    background: #3FB488;
+    background: #1abc9c;
     color: #bdbdbd;
 }
 
@@ -67,10 +68,15 @@ h5 {
     color: #fff;
 }
 
-
-
 .bg-1 p {
     font-style: italic;
+}
+
+.bg-2 {
+    /*background-color: seagreen;*/
+    background-color: #474e5d;
+    /*!* Dark Blue *!*/
+    color: #ffffff;
 }
 
 .list-group-item:first-child {
@@ -96,21 +102,21 @@ h5 {
 
 .btn {
     /*padding: 10px 20px;*/
-    background: #3FB488;
+    background: #1abc9c;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 3px;
     transition: .2s;
     height: 35px;
 }
 
 .btn:hover, .btn:focus {
     /*border: 1px solid #333;*/
-    background-color: #68b391;
+    background-color: #11623f;
     color: #fff;
 }
 
 .modal-header, h4, .close {
-    background: #3FB488;
+    background: #1abc9c;
     color: #fff !important;
     text-align: center;
     font-size: 30px;
@@ -134,7 +140,7 @@ h5 {
 .navbar {
     font-family: Montserrat, sans-serif;
     margin-bottom: 0;
-    background: #3FB488;
+    background: #1abc9c;
     border: 0;
     font-size: 11px !important;
     letter-spacing: 3px;
@@ -166,7 +172,7 @@ h5 {
 
 .navbar-nav li.active a {
     color: #fff !important;
-    background: #3FB488;
+    background: #1abc9c;
 !important;
 }
 
@@ -176,7 +182,7 @@ h5 {
 
 .open .dropdown-toggle {
     color: #fff !important;
-    background: #3FB488 !important;
+    background: #1abc9c !important;
 }
 
 .dropdown-menu li a {
@@ -197,7 +203,7 @@ h5 {
 }
 
 footer {
-    background: #3FB488;
+    background: #1abc9c;
     color: #f5f5f5;
     padding: 32px;
 }
@@ -212,7 +218,7 @@ footer a:hover {
 }
 
 .form-control {
-    border-radius: 5px;
+    /*border-radius: 5px;*/
 }
 
 textarea {
@@ -233,8 +239,14 @@ textarea {
 
 #srchGlass {
     color: #fff;
+    background: transparent;
+    border: 0;
 }
 
 #srchGlass:hover {
     color: #000;
+}
+
+.col-center {
+    margin: 0 auto;
 }

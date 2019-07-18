@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>TIFFANY</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/searchEventInfo.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="javascripts/controller.js"></script>
+    <script>
+        function searchEventInfo(params) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML =
+                        this.responseText;
+                }
+            };
+            xhttp.open("GET", "/showTicketInfo?id=" + params, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div id="demo">
+        <div class="container">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">TIFFANY</a>
+                </div>
+                <div class="navbar-header" style="height: 50px; display: inline-block">
+                    <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
+                        <table>
+                            <tr>
+                                <td style=" margin-top: 5px; margin-bottom: 5px;">
+                                <span style=" margin-bottom: 5px;">
+                                    <input name="searchEvent" type="text" id="searchEvent"
+                                           style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; "
+                                           placeholder="이벤트 키워드를 입력하세요.">
+                                </span>
+                                </td>
+                                <td style=" margin-bottom: 5px;">
+                                <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
+                                    <button class="glyphicon glyphicon-search" id="srchGlass"
+                                            style="font-size: 2em; width:50px; height:40px;"></button>
+                                </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <%
+                        if (loginState) {
+                            // 이벤트 주최자일 때
+                        if (loggedInUserGroupNum === 2) {
+                        %>
+                            <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" id="loginDropdown">
+                                    <br>
+                                    <li><%= loggedInUserGroup %></li>
+                                    <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+                                    <hr>
+                                    <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                                    <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                                    <br>
+                                </ul>
+                            </li>
+                        <%
+                            // 이벤트 참가자일 때
+                        } else if (loggedInUserGroupNum === 3) {
+                        %>
+                            <li><a href="/pay">SELL</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" id="loginDropdown">
+                                    <br>
+                                    <li><%= loggedInUserGroup %></li>
+                                    <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+                                    <hr>
+                                    <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                                    <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                                    <br>
+                                </ul>
+                            </li>
+                        <%
+                            // 관리자일 때
+                        } else {
+                        %>
+                            <li><a href="#">ADMIN</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" id="loginDropdown">
+                                    <br>
+                                    <li><%= loggedInUserGroup %></li>
+                                    <hr>
+                                    <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                                    <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                                    <br>
+                                </ul>
+                            </li>
+                        <%
+                        }
+                        } else {
+                        %>
+                            <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
+                        <%
+                        }
+                        %>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <!-- First Container -->
+        <div class="container-fluid bg-3 text-left">
+            <h1 class="col-sm-5" style="font-size: 30px; color: #000; margin-bottom: 0; margin-left: 140px;">
+                Top Matches: <%= eventName %>
+            </h1>
+        </div>
+
+        <!-- Third Container (Grid) -->
+        <div class="container-fluid bg-3 text-center">
+            <div><hr>
+    <!--        <div class="w3-panel w3-border">-->
+                <% for(let i = 0; event.length > i ;i++) { %>
+                <div>
+                    <div onclick='searchEventInfo( "<%= event_num[i] %>" )'>
+
+                        <div id="showTicketInfo_btn">
+                            <div class="col-sm-3">
+                                <div> <%= event_dttm_DY[i] %> </div>
+                                <div> <%= event_dttm_DD[i] %> &nbsp
+                                    <%= event_dttm_MM[i] %></div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div id="eventInfo" style="font-size: 100%; text-align: left"> <%= event[i] %> </div>
+                                <div style="font-size: 70%; text-align: left"><%= event_plc[i] %>,&nbsp <%= event_area[i] %>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <hr>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <br><br><br><br>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> LOGIN</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="loginId">
+                            <span class="glyphicon glyphicon-user"></span> ID
+                        </label>
+                        <input type="text" class="form-control" id="loginId" placeholder="Enter your ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPw"><span class="glyphicon glyphicon-user"></span> Password</label>
+                        <input type="password" class="form-control" id="loginPw" placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-block" id="loginBtn">Login
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                    <p>처음이신가요? <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal-->
+    <div class="modal fade" id="signupModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="signupId">
+                            <span class="glyphicon glyphicon-user"></span> ID
+                        </label>
+                        <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPw">
+                            <span class="glyphicon glyphicon-user"></span> Password
+                        </label>
+                        <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="signupPwRepeat" placeholder="Enter your password repeat">
+                    </div>
+                    <div class="form-group">
+                        <label for="userGroup">
+                            <span class="glyphicon glyphicon-user"></span> 사용자그룹
+                        </label><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="1">&nbsp;&nbsp;관리자<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
+                    </div>
+                    <button type="submit" class="btn btn-block" id="signupBtn" data-dismiss="modal">Sign up
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <a class="up-arrow" href="#" data-toggle="tooltip" title="TO TOP">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a><br><br>
+        <p>Copyright 2019. Team TIFFANY. All rights reserved.</p>
+    </footer>
+</body>
+</html>

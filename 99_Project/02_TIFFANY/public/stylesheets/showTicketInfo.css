@@ -1,0 +1,25 @@
+
+  /* Remove the navbar's default margin-bottom and rounded borders */
+  /*.navbar {*/
+  /*  margin-bottom: 0;*/
+  /*  border-radius: 0;*/
+  /*  !*letter-spacing: white;*!*/
+  /*  color: #ffffff;*/
+  /*  background-color: #1abc9c;*/
+  /*  text-emphasis: white;*/
+  /*  text-decoration: #ffffff;*/
+  /*  */
+  /*}*/
+  .EventItem__Body {
+          padding: 10px 0;
+          cursor: pointer;
+          -webkit-transition: background .3s ease-in-out;
+          -o-transition: background .3s ease-in-out;
+          transition: background .3s ease-in-out;
+          display: block;
+  }
+  /* Add a gray background color and some padding to the footer */
+  /*footer {*/
+  /*  background-color: #f2f2f2;*/
+  /*  padding: 25px;*/
+  /*}*/

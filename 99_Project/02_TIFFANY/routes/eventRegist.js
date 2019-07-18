@@ -8,6 +8,7 @@ router.get("/", function (req, res, next) {
         loggedInId: req.session.userId,
         loggedInUserGroup: req.session.userGroup,
         loggedInUserGroupNum: req.session.userGroupNum,
+        tokenQty: req.session.tokenQty,
     });
 });
 
@@ -57,8 +58,8 @@ VALUES("${req.body.eventName}", ${req.session.userNum}, ${req.session.userNum}, 
                         eventNum = results[0].LAST_INSERT_ID;
 
                         // 티켓 발행 쿼리
-                        const ticketIssueSql = `INSERT INTO TICKET(EVENT_NUM, OPNR_NUM, SALE_ORG_PRC, FRST_SALER_NUM, LAST_BUYER_NUM, SEAT_NUM, BUY_AVAIL_YN, TICKET_VALID_YN)
-VALUES(${eventNum}, ${req.session.userNum}, "${req.body.saleOrgPrc}", NULL, NULL, NULL, "Y", "Y")`;
+                        const ticketIssueSql = `INSERT INTO TICKET(EVENT_NUM, OPNR_NUM, SALE_ORG_PRC, SALE_CUR_PRC, FRST_SALER_NUM, LAST_BUYER_NUM, SEAT_NUM, BUY_AVAIL_YN, TICKET_VALID_YN)
+VALUES(${eventNum}, ${req.session.userNum}, "${req.body.saleOrgPrc}", "${req.body.saleOrgPrc}", "${req.session.userNum}", NULL, NULL, "Y", "Y")`;
 
                         while (issueQty < req.body.ticketIssueQty) {
                             conn.query(ticketIssueSql, (err, results, fields) => {

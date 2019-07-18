@@ -12,101 +12,97 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="javascripts/controller.js"></script>
-<!--    <script>-->
-<!--        bufferSave = () => {-->
-<!--            const fileInput = document.getElementById("fileInput").files[0];-->
-<!--            const xhr = new XMLHttpRequest();-->
-<!--            const formData = new FormData();-->
-
-<!--            formData.append("img", fileInput);-->
-
-<!--            xhr.onload = function() {-->
-<!--                if (xhr.status === 200 || xhr.status === 201) {-->
-<!--                    console.log(xhr.responseText);-->
-<!--                } else {-->
-<!--                    console.error(xhr.responseText);-->
-<!--                }-->
-<!--            };-->
-
-<!--            xhr.open("POST", "/imgUpload");-->
-<!--            xhr.setRequestHeader("Content-Type", "multipart/form-data");-->
-<!--            xhr.send(formData);-->
-
-<!--            console.log("fileInput : " + fileInput);-->
-<!--            console.log("formData : " + formData);-->
-<!--        }-->
-<!--    </script>-->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="/">TIFFANY</a>
             </div>
             <div class="navbar-header" style="height: 50px; display: inline-block">
-                <a><input type="text" id="eventSrchBox" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; margin-top: 5px; margin-bottom: 5px;" placeholder="이벤트, 팀, 아티스트"></a>
-                <a><span class="glyphicon glyphicon-search" id="srchGlass" style="; font-size: 2em; width:50px; height:40px;"></span></a>
+                <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
+                    <table>
+                        <tr>
+                            <td style=" margin-top: 5px; margin-bottom: 5px;">
+                            <span style=" margin-bottom: 5px;">
+                                <input name="searchEvent" type="text" id="searchEvent" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; " placeholder="이벤트 키워드를 입력하세요.">
+                            </span>
+                            </td>
+                            <td style=" margin-bottom: 5px;">
+                            <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
+                                <button class="glyphicon glyphicon-search" id="srchGlass" style="font-size: 2em; width:50px; height:40px;"></button>
+                            </span>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <%
-                        if (loginState) {
-                            // 이벤트 주최자일 때
-                            if (loggedInUserGroupNum === 2) {
+                    if (loginState) {
+                        // 이벤트 주최자일 때
+                    if (loggedInUserGroupNum === 2) {
                     %>
-                    <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="loginDropdown">
-                            <li><%= loggedInUserGroup %></li>
-                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
-                        </ul>
-                    </li>
+                        <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="loginDropdown">
+                                <br>
+                                <li><%= loggedInUserGroup %></li>
+                                <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+                                <hr>
+                                <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                                <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                                <br>
+                            </ul>
+                        </li>
                     <%
-                            // 이벤트 참가자일 때
-                            } else if (loggedInUserGroupNum === 3) {
+                        // 이벤트 참가자일 때
+                    } else if (loggedInUserGroupNum === 3) {
                     %>
-                    <li><a href="#">SELL</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="loginDropdown">
-                            <li><%= loggedInUserGroup %></li>
-                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
-                        </ul>
-                    </li>
+                        <li><a href="/pay">SELL</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="loginDropdown">
+                                <br>
+                                <li><%= loggedInUserGroup %></li>
+                                <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+                                <hr>
+                                <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                                <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                                <br>
+                            </ul>
+                        </li>
                     <%
-                            // 관리자일 때
-                            } else {
+                        // 관리자일 때
+                    } else {
                     %>
-                    <li><a href="#">ADMIN</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="loginDropdown">
-                            <li><%= loggedInUserGroup %></li>
-                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
-                        </ul>
-                    </li>
+                        <li><a href="#">ADMIN</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="loginDropdown">
+                                <br>
+                                <li><%= loggedInUserGroup %></li>
+                                <hr>
+                                <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+                                <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+                                <br>
+                            </ul>
+                        </li>
                     <%
-                            }
-                        } else {
+                    }
+                    } else {
                     %>
-                    <li><a href="#" role="button" data-toggle="modal" data-target="#loginModal">LOGIN</a></li>
+                        <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
                     <%
-                        }
+                    }
                     %>
                 </ul>
             </div>
@@ -195,6 +191,7 @@
     <!-- Register Event -->
     <div class="container">
         <h3 class="text-center" style="color: #000;">이벤트 등록</h3>
+        <hr><br>
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -235,7 +232,7 @@
 
                     <!-- 티켓 상한가 -->
                     <div class="col-sm-12 form-group input-append spinner" data-trigger="spinner">
-                        <input class="form-control" id="priceLimit" name="name" placeholder="상한가" type="text" value="1" data-rule="quantity">
+                        <input class="form-control" id="priceLimit" name="name" type="text" placeholder="상한가 비율" data-rule="quantity">
                         <div class="add-on">
                             <a href="javascript:" class="spin-up" data-spin="up">
                                 <i class="icon-sort-up"></i>

@@ -35,9 +35,13 @@ app.use('/', require('./routes/index'));
 app.use('/signup', require('./routes/signup'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
+app.use('/withdraw', require('./routes/withdraw'));
 app.use('/eventRegist', require('./routes/eventRegist'));
 app.use('/imgUpload', require('./routes/imgUpload'));
 app.use('/myInfoUpdate', require('./routes/myInfoUpdate'));
+app.use('/searchEventInfo', require('./routes/searchEventInfo'));
+app.use('/showTicketInfo', require('./routes/showTicketInfo'));
+app.use('/pay', require('./routes/pay'));
 
 // app.post("/imgUpload", upload.single("imgName"), (req, res) => {
 //     console.log("app.post 진입");

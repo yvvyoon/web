@@ -7,6 +7,7 @@ router.get('/', function (req, res, next) {
         loggedInId: req.session.userId,
         loggedInUserGroupNum: req.session.userGroupNum,
         loggedInUserGroup: req.session.userGroup,
+        tokenQty: req.session.tokenQty,
         newImgPath: req.session.newImgPath,
     });
 });
