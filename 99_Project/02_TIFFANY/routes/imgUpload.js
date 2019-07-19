@@ -46,14 +46,14 @@ router.post("/", (req, res) => {
         uploadResultUrl = `${host}/upload/${file.name}`;
     });
 
-    form.parse(req, function (err, field, files) {
-        console.log("?????");
-        console.log(files);
-
-        return res.json({
-            uploadResult: uploadResultUrl,
-        });
-    })
+    // form.parse(req, function (err, field, files) {
+    //     console.log("?????");
+    //     console.log(files);
+    //
+    //     return res.json({
+    //         uploadResult: uploadResultUrl,
+    //     });
+    // })
 });
 
 module.exports = router;

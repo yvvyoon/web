@@ -200,7 +200,7 @@ $(document).ready(function () {
 
     // Football 이미지 클릭
     $("#footballImg").click(function () {
-        window.location.href = "/searchEventInfo";
+        window.location.href = "/searchEventInfo?searchEvent=";
     });
 
     // Basketball 이미지 클릭

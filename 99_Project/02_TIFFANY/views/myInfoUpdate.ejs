@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>TIFFANY</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="javascripts/controller.js"></script>
+  <script>
+    updateCancel = () => {
+      window.location.href = "/";
+    };
+  </script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">TIFFANY</a>
+    </div>
+    <div class="navbar-header" style="height: 50px; display: inline-block">
+      <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
+        <table>
+          <tr>
+            <td style=" margin-top: 5px; margin-bottom: 5px;">
+                                <span style=" margin-bottom: 5px;">
+                                    <input name="searchEvent" type="text" id="searchEvent" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; " placeholder="이벤트 키워드를 입력하세요.">
+                                </span>
+            </td>
+            <td style=" margin-bottom: 5px;">
+                                <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
+                                    <button class="glyphicon glyphicon-search" id="srchGlass" style="font-size: 2em; width:50px; height:40px;"></button>
+                                </span>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <%
+        if (loginState) {
+          // 이벤트 주최자일 때
+        if (loggedInUserGroupNum === 2) {
+        %>
+          <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="loginDropdown">
+              <br>
+              <li><%= loggedInUserGroup %></li>
+              <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+              <hr>
+              <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+              <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+              <br>
+            </ul>
+          </li>
+        <%
+          // 이벤트 참가자일 때
+        } else if (loggedInUserGroupNum === 3) {
+        %>
+          <li><a href="/pay">SELL</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="loginDropdown">
+              <br>
+              <li><%= loggedInUserGroup %></li>
+              <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
+              <hr>
+              <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+              <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+              <br>
+            </ul>
+          </li>
+        <%
+          // 관리자일 때
+        } else {
+        %>
+          <li><a href="#">ADMIN</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="loginDropdown">
+              <br>
+              <li><%= loggedInUserGroup %></li>
+              <hr>
+              <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
+              <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
+              <br>
+            </ul>
+          </li>
+        <%
+        }
+        } else {
+        %>
+          <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
+        <%
+        }
+        %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4><span class="glyphicon glyphicon-lock"></span> LOGIN</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="loginId">
+            <span class="glyphicon glyphicon-user"></span> ID
+          </label>
+          <input type="text" class="form-control" id="loginId" placeholder="Enter your ID">
+        </div>
+        <div class="form-group">
+          <label for="loginPw"><span class="glyphicon glyphicon-user"></span> Password</label>
+          <input type="password" class="form-control" id="loginPw" placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn btn-block" id="loginBtn">Login
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove"></span> Cancel
+        </button>
+        <p>처음이신가요? <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sign Up Modal-->
+<div class="modal fade" id="signupModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="signupId">
+            <span class="glyphicon glyphicon-user"></span> ID
+          </label>
+          <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+        </div>
+        <div class="form-group">
+          <label for="signupPw">
+            <span class="glyphicon glyphicon-user"></span> Password
+          </label>
+          <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
+        </div>
+        <div class="form-group">
+          <label for="userGroup">
+            <span class="glyphicon glyphicon-user"></span> 사용자그룹
+          </label><br>
+          <input type="radio" name="userGroup" value="1"> 관리자&nbsp;
+          <input type="radio" name="userGroup" value="2"> 이벤트 주최자&nbsp;
+          <input type="radio" name="userGroup" value="3"> 이벤트 참가자
+        </div>
+        <button type="submit" class="btn btn-block" id="signupBtn">Sign up
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove"></span> Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update My Info -->
+<div class="container">
+  <h3 class="text-center" style="color: #000; padding-top: 50px">내 정보 수정</h3>
+  <div>
+    <hr>
+    <div class="row test"  >
+      <div style="padding-left: 400px; padding-right: 400px">
+        <div class="row">
+          <div class="form-group">
+            <label for="signupPw">
+              <span class="glyphicon glyphicon-user"></span> Password
+            </label>
+            <input type="password" class="form-control" id="updatePw" placeholder="Enter new password">
+          </div>
+          <!--                <div class="form-group">-->
+          <!--                    <label for="signupPw">-->
+          <!--                        <span class="glyphicon glyphicon-user"></span> Password-->
+          <!--                    </label>-->
+          <!--                    <input type="password" class="form-control" id="updatePwRepeat" placeholder="Enter new password repeat">-->
+          <!--                </div>-->
+          <div class="form-group" style="horiz-align: center">
+            <label for="updateUserGroup">
+              <span class="glyphicon glyphicon-user"></span> 사용자그룹
+            </label><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="1">&nbsp;&nbsp;관리자<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
+          </div>
+        </div>
+
+        <!-- 내 정보 수정, 취소, 탈퇴 -->
+        <div class="row"  style="padding-left: 110px; padding-right: 75px;">
+          <div>
+            <br>
+            <button class="btn" type="submit" id="myInfoUpdateSubmitBtn">수정</button>&nbsp;&nbsp;
+            <button class="btn" type="reset" onclick="updateCancel()">취소</button>&nbsp;&nbsp;
+            <button class="btn" id="withdrawBtn" style="background-color: gray;">탈퇴</button>
+          </div>
+          <!--                <div class="col-md-4 form-group">-->
+          <!--                    <br>-->
+          <!--                    -->
+          <!--                </div>-->
+          <!--                <div class="col-md-4 form-group">-->
+          <!--                    <br>-->
+          <!--                    -->
+          <!--                </div>-->
+        </div><br><br><br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#" data-toggle="tooltip" title="TO TOP">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>Copyright 2019. Team TIFFANY. All rights reserved.</p>
+</footer>
+</body>
+</html>

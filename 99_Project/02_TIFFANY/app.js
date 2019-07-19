@@ -45,6 +45,8 @@ app.use('/showTicketInfo', require('./routes/showTicketInfo'));
 app.use('/pay', require('./routes/pay'));
 app.use('/trans', require('./routes/trans'));
 app.use('/sell', require('./routes/sell'));
+app.use('/admin', require('./routes/admin'));
+
 
 // app.post("/imgUpload", upload.single("imgName"), (req, res) => {
 //     console.log("app.post 진입");
