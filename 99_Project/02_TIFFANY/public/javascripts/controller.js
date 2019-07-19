@@ -186,6 +186,17 @@ $(document).ready(function () {
         }
     });
 
+    $("#sellBtn").click(function() {
+        const sellResult = {
+            msg: "",
+        };
+
+        $.get("/sell", function(data, status) {
+
+            alert("sell 뿌리기 성공");
+       });
+    });
+
 
     // Football 이미지 클릭
     $("#footballImg").click(function () {

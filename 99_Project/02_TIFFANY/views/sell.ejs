@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Theme Made By www.w3schools.com - No Copyright -->
     <title>TIFFANY</title>
@@ -12,14 +13,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="javascripts/controller.js"></script>
-    <script>
-        updateCancel = () => {
-            window.location.href = "/";
-        };
-    </script>
+    <style>
+        .button {
+            background-color: red;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar navbar-default">
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50"
+      style="background: #dbdbdb;font-family: Segoe UI ,Arial,sans-serif;">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">TIFFANY</a>
@@ -30,12 +43,15 @@
                         <tr>
                             <td style=" margin-top: 5px; margin-bottom: 5px;">
                                 <span style=" margin-bottom: 5px;">
-                                    <input name="searchEvent" type="text" id="searchEvent" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; " placeholder="이벤트 키워드를 입력하세요.">
+                                    <input name="searchEvent" type="text" id="searchEvent"
+                                           style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; "
+                                           placeholder="이벤트 키워드를 입력하세요.">
                                 </span>
                             </td>
                             <td style=" margin-bottom: 5px;">
                                 <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
-                                    <button class="glyphicon glyphicon-search" id="srchGlass" style="font-size: 2em; width:50px; height:40px;"></button>
+                                    <button class="glyphicon glyphicon-search" id="srchGlass"
+                                            style="font-size: 2em; width:50px; height:40px;"></button>
                                 </span>
                             </td>
                         </tr>
@@ -51,7 +67,8 @@
                     %>
                         <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                               style="color: black !important;"><%= loggedInId %>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" id="loginDropdown">
@@ -68,9 +85,10 @@
                         // 이벤트 참가자일 때
                     } else if (loggedInUserGroupNum === 3) {
                     %>
-                        <li><a href="/pay">SELL</a></li>
+                            <li><a href="/sell" id="sellBtn">SELL</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                               style="color: black !important;"><%= loggedInId %>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" id="loginDropdown">
@@ -89,7 +107,8 @@
                     %>
                         <li><a href="#">ADMIN</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                               style="color: black !important;"><%= loggedInId %>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" id="loginDropdown">
@@ -105,7 +124,8 @@
                     }
                     } else {
                     %>
-                        <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
+                        <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal"
+                               data-target="#loginModal"> LOGIN</a></li>
                     <%
                     }
                     %>
@@ -159,32 +179,42 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                     <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
                 </div>
-
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="signupId">
-                                <span class="glyphicon glyphicon-user"></span> ID
-                            </label>
-                            <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="signupId">
+                            <span class="glyphicon glyphicon-user"></span> ID
+                        </label>
+                        <div>
+                            <input type="text" class="form-control" id="signupId" onkeyup="idCheck()"
+                                   placeholder="Enter your ID">
+                            <p></p>
+                            <button class="btn" style="float: right;" id="idCheck">중복체크</button>
+                            <p id="idCheckMsg"></p>
                         </div>
-                        <div class="form-group">
-                            <label for="signupPw">
-                                <span class="glyphicon glyphicon-user"></span> Password
-                            </label>
-                            <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
-                        </div>
-                        <div class="form-group">
-                            <label for="userGroup">
-                                <span class="glyphicon glyphicon-user"></span> 사용자그룹
-                            </label><br>
-                            <input type="radio" name="userGroup" value="1"> 관리자&nbsp;
-                            <input type="radio" name="userGroup" value="2"> 이벤트 주최자&nbsp;
-                            <input type="radio" name="userGroup" value="3"> 이벤트 참가자
-                        </div>
-                        <button type="submit" class="btn btn-block" id="signupBtn">Sign up
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button>
                     </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="signupPw">
+                            <span class="glyphicon glyphicon-user"></span> Password
+                        </label>
+                        <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="signupPwRepeat"
+                               placeholder="Enter your password repeat">
+                    </div>
+                    <div class="form-group">
+                        <label for="userGroup">
+                            <span class="glyphicon glyphicon-user"></span> 사용자그룹
+                        </label><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="1">&nbsp;&nbsp;관리자<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
+                    </div>
+                    <button type="submit" class="btn btn-block" id="signupBtn" data-dismiss="modal">Sign Up
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn pull-left" data-dismiss="modal">
                         <span class="glyphicon glyphicon-remove"></span> Cancel
@@ -194,55 +224,41 @@
         </div>
     </div>
 
-    <!-- Update My Info -->
-    <div class="container">
-        <h3 class="text-center" style="color: #000; padding-top: 50px">내 정보 수정</h3>
-        <div>
+
+    <!-- Tickets list -->
+    <div style="background-color: #fff; margin: 5px 5px 10px 5px; margin-top:120px;">
+        <h3 class="text-center" style="color: black; margin: 0 5px 10px 5px;">MY TICKETS</h3>
         <hr>
-        <div class="row test"  >
-            <div style="padding-left: 400px; padding-right: 400px">
-                <div class="row">
-                    <div class="form-group">
-                        <label for="signupPw">
-                            <span class="glyphicon glyphicon-user"></span> Password
-                        </label>
-                        <input type="password" class="form-control" id="updatePw" placeholder="Enter new password">
-                    </div>
-    <!--                <div class="form-group">-->
-    <!--                    <label for="signupPw">-->
-    <!--                        <span class="glyphicon glyphicon-user"></span> Password-->
-    <!--                    </label>-->
-    <!--                    <input type="password" class="form-control" id="updatePwRepeat" placeholder="Enter new password repeat">-->
-    <!--                </div>-->
-                    <div class="form-group" style="horiz-align: center">
-                        <label for="updateUserGroup">
-                            <span class="glyphicon glyphicon-user"></span> 사용자그룹
-                        </label><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="1">&nbsp;&nbsp;관리자<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="updateUserGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
+        <br>
+        <div class="row">
+            <div class="col-sm-12" style="margin: 0 5px 10px 5px;">
+                <div class="row" style="background:white; ">
+                    <div style="margin: 10px; ">
+                        <span>티켓번호</span>
+                        <span>이벤트이름</span>
+                        <span>원가</span>
+                        <span>현재판매가</span>
+                        <span>최종구매자</span>
+                        <span>좌석번호</span>
+                        <span>티켓유효여부</span>
+                        <hr>
+                        <%
+                            for(let i = 0; i < 5; i++) {
+                        %>
+                        <span><%=ticket_num[i]%></span>
+                        <span><%=event_nm[i]%></span>
+                        <span><%=ticket_org_price[i]%></span>
+                        <span><%=ticket_cur_price[i]%></span>
+                        <span><%=user_id[i]%></span>
+                        <span><%=ticket_seat_num[i]%></span>
+                        <span><%=ticket_valid_yn[i]%></span>
+                        <hr>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
-
-                <!-- 내 정보 수정, 취소, 탈퇴 -->
-                <div class="row"  style="padding-left: 110px; padding-right: 75px;">
-                    <div>
-                        <br>
-                        <button class="btn" type="submit" id="myInfoUpdateSubmitBtn">수정</button>&nbsp;&nbsp;
-                        <button class="btn" type="reset" onclick="updateCancel()">취소</button>&nbsp;&nbsp;
-                        <button class="btn" id="withdrawBtn" style="background-color: gray;">탈퇴</button>
-                    </div>
-    <!--                <div class="col-md-4 form-group">-->
-    <!--                    <br>-->
-    <!--                    -->
-    <!--                </div>-->
-    <!--                <div class="col-md-4 form-group">-->
-    <!--                    <br>-->
-    <!--                    -->
-    <!--                </div>-->
-                </div><br><br><br><br>
             </div>
-        </div>
         </div>
     </div>
 
