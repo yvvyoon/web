@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Theme Made By www.w3schools.com - No Copyright -->
     <title>TIFFANY</title>
@@ -12,256 +13,102 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="javascripts/controller.js"></script>
+    <style>
+        .button {
+            background-color: red;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">TIFFANY</a>
-        </div>
-        <div class="navbar-header" style="height: 50px; display: inline-block">
-            <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
-                <table>
-                    <tr>
-                        <td style=" margin-top: 5px; margin-bottom: 5px;">
-                            <span style=" margin-bottom: 5px;">
-                                <input name="searchEvent" type="text" id="searchEvent" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; " placeholder="이벤트 키워드를 입력하세요.">
-                            </span>
-                        </td>
-                        <td style=" margin-bottom: 5px;">
-                            <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
-                                <button class="glyphicon glyphicon-search" id="srchGlass" style="font-size: 2em; width:50px; height:40px;"></button>
-                            </span>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <%
-                if (loginState) {
-                    // 이벤트 주최자일 때
-                if (loggedInUserGroupNum === 2) {
-                %>
-                    <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="loginDropdown">
-                            <br>
-                            <li><%= loggedInUserGroup %></li>
-                            <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
-                            <hr>
-                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
-                            <br>
-                        </ul>
-                    </li>
-                <%
-                    // 이벤트 참가자일 때
-                } else if (loggedInUserGroupNum === 3) {
-                %>
-                    <li><a href="/pay">SELL</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="loginDropdown">
-                            <br>
-                            <li><%= loggedInUserGroup %></li>
-                            <li style="font-style: italic;font-weight: bold; color: orangered"><%= tokenQty %> FNY</li>
-                            <hr>
-                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
-                            <br>
-                        </ul>
-                    </li>
-                <%
-                    // 관리자일 때
-                } else {
-                %>
-                    <li><a href="#">ADMIN</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="loginDropdown">
-                            <br>
-                            <li><%= loggedInUserGroup %></li>
-                            <hr>
-                            <li><a href="/myInfoUpdate" role="button" id="myInfoUpdateBtn">내 정보 수정</a></li>
-                            <li><a href="#" role="button" id="logoutBtn">LOGOUT</a></li>
-                            <br>
-                        </ul>
-                    </li>
-                <%
-                }
-                } else {
-                %>
-                    <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
-                <%
-                }
-                %>
-            </ul>
-        </div>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50"
+      style="background: #dbdbdb;font-family: Segoe UI ,Arial,sans-serif;">
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <div class="navbar-brand" id="logo">TIFFANY</div>
     </div>
 </nav>
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
-                <h4><span class="glyphicon glyphicon-lock"></span> LOGIN</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="loginId">
-                        <span class="glyphicon glyphicon-user"></span> ID
-                    </label>
-                    <input type="text" class="form-control" id="loginId" placeholder="Enter your ID">
-                </div>
-                <div class="form-group">
-                    <label for="loginPw"><span class="glyphicon glyphicon-user"></span> Password</label>
-                    <input type="password" class="form-control" id="loginPw" placeholder="Enter your password">
-                </div>
-                <button type="submit" class="btn btn-block" id="loginBtn">Login
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn pull-left" data-dismiss="modal">
-                    <span class="glyphicon glyphicon-remove"></span> Cancel
-                </button>
-                <p>처음이신가요? <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sign Up Modal-->
-<div class="modal fade" id="signupModal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
-                <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="signupId">
-                        <span class="glyphicon glyphicon-user"></span> ID
-                    </label>
-                    <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
-                </div>
-                <div class="form-group">
-                    <label for="signupPw">
-                        <span class="glyphicon glyphicon-user"></span> Password
-                    </label>
-                    <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
-                </div>
-                <div class="form-group">
-                    <label for="userGroup">
-                        <span class="glyphicon glyphicon-user"></span> 사용자그룹
-                    </label><br>
-                    <input type="radio" name="userGroup" value="1"> 관리자&nbsp;
-                    <input type="radio" name="userGroup" value="2"> 이벤트 주최자&nbsp;
-                    <input type="radio" name="userGroup" value="3"> 이벤트 참가자
-                </div>
-                <button type="submit" class="btn btn-block" id="signupBtn">Sign up
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn pull-left" data-dismiss="modal">
-                    <span class="glyphicon glyphicon-remove"></span> Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Payment -->
-<div class="container">
-    <h3 class="text-center" style="color: #000;">티켓 구매하기</h3><hr><br>
-        <div class="row">
-            <div class="col-sm-7" style="border: 1px solid darkgray;">
-                <div class="row">
-                    <div class="form-group">
-                        <p class="text-center" style="color: #000; letter-spacing: 3px;">Do you have a ticket what you want?</p>
-                    </div>
-                    <div style="border: 1px solid darkgray; height:350px; margin: 10px; ">asdfasdfasdf
-                        <hr>
-                        <input type="text">asdfasdf
-                        <br>
-                        <p>FNY 토큰으로 결제됩니다.</p>
-                        <div class="text-center">
-                            <button class="btn text-center" onclick="alert('시발')" >Buy</button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div style="height:200px; margin: 10px;">
-                        <div class="text-center">
-                            <img src="images/tiffany.png" width="200px" height="200px">
-                        </div>
-                    </div>
+<div style="margin: 5px 5px 10px 5px">
+    <h3 class="text-left" style="color: black; margin: 0 5px 10px 5px;">PURCHASE TICKETS</h3>
+    <hr><br>
+    <div class="row">
+        <div class="col-sm-7" style="margin: 0 5px 10px 5px;">
+            <div class="row" style="background:white; ">
+                <div style="margin: 10px; ">
+                    <p class="text-left" style="color: #000;">Do you have a ticket what you want?</p>
+                    <div id="buyerId" style="font-size: 200%"><%=user_id%></div>
+                    <hr>
+                    <%=user_token%> FNY 입니다.
+                    <br>
+                    <p style="margin-right: 20px;" class="text-right">FNY 토큰으로 안전하게 결제됩니다.</p>
+                    <button class="button" id="pay_btn" style="margin-right:10px; border-radius: 5px"> pay <%=ticket_final_price%>FNY </button>
                 </div>
             </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4" style="border: 1px solid darkgray;">
-                <div class="row">
-                    <div class="form-group">
-                        <p class="text-center" style="color: #000; letter-spacing: 3px; ">Bill</p>
-                    </div>
-                    <div style="border: 0px solid darkgray; height:600px; margin: 10px; ">
-                        <div style="margin-top: 100px;"></div>
-                        <h3 class="text-left" style="margin-left: 20px; color: #000;">아스날 vs 리버풀</h3>
-                        <div style="margin-left: 20px;">
-                            <p>2019-07-18</p>
-                            <p>에미레이츠 스타디움, 런던, 영국</p>
-                            <p>A21</p>
-                        </div>
-                        <hr>
-                        <h3 class="text-left" style="margin-left: 20px; color: #000;">Summary</h3>
-                        <div style="margin-left: 20px;">
-                            <table>
-                                <tr >
-                                    <td style="border: 1px solid"><p>1 ticket(s) x $13.63</p></td>
-                                    <td style="border: 1px solid"><p>1 ticket(s) x $13.63</p></td>
-                                </tr>
-                                <tr style="border: 1px solid">
-                                    <td style="border: 1px solid"><p>수수료</p></td>
-                                    <td style="border: 1px solid"><p>수수료</p></td>
-                                </tr>
-                                <tr style="border: 1px solid">
-                                    <td style="border: 1px solid"><p>배송비</p></td>
-                                    <td style="border: 1px solid"><p>배송비</p></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <hr>
-                        <div class="text-center">
-                            <button class="btn" style="width: 250px;" onclick="alert('좀 사라')">구매확정</button>
-                        </div>
+            <div class="row">
+                <div style="margin: 10px;">
+                    <div class="text-center">
+                        <img src="images/nuevo.JPG" width="100px" height="100px">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4" style=" margin: 0 5px 10px 5px;">
+            <div class="row" style="background:white; ">
+
+                <div style="margin: 10px; ">
+                    <h3 style="margin-left: 20px; color: #000;"><%= event_name %></h3>
+                    <div style="margin-left: 20px;">
+                        <p><%=event_DY%> <%=event_DD%>-<%=event_MM%>-<%=event_YY%> <%=event_Hr%>:<%=event_Min%>0</p>
+                        <p>SEAT NUMBER <%=ticket_seat_num%></p>
+                        TICKET NUMBER #<div id="ticketNum"><%=ticket_num%></div>
+                    </div>
+                    <hr>
+                    <h3 style="margin-left: 20px; color: #000;">Summary</h3>
+                    <div style="margin-left: 20px;">
+                        <table style="width: 100%">
+                            <tr>
+                                <td>
+                                    <p>ticket</p>
+                                </td>
+                                <td>
+                                    <p><%=ticket_cur_price%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>fee</p>
+                                </td>
+                                <td>
+                                    <p><%=ticket_fee%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>Final Price</h3>
+                                </td>
+                                <td>
+                                    <h3 id="ticketPrice"><%=ticket_final_price%></h3>FNY
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="text-center">
@@ -271,4 +118,5 @@
     <p>Copyright 2019. Team TIFFANY. All rights reserved.</p>
 </footer>
 </body>
+
 </html>

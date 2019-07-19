@@ -159,31 +159,32 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                     <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="signupId">
-                            <span class="glyphicon glyphicon-user"></span> ID
-                        </label>
-                        <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="signupId">
+                                <span class="glyphicon glyphicon-user"></span> ID
+                            </label>
+                            <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPw">
+                                <span class="glyphicon glyphicon-user"></span> Password
+                            </label>
+                            <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
+                        </div>
+                        <div class="form-group">
+                            <label for="userGroup">
+                                <span class="glyphicon glyphicon-user"></span> 사용자그룹
+                            </label><br>
+                            <input type="radio" name="userGroup" value="1"> 관리자&nbsp;
+                            <input type="radio" name="userGroup" value="2"> 이벤트 주최자&nbsp;
+                            <input type="radio" name="userGroup" value="3"> 이벤트 참가자
+                        </div>
+                        <button type="submit" class="btn btn-block" id="signupBtn">Sign up
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="signupPw">
-                            <span class="glyphicon glyphicon-user"></span> Password
-                        </label>
-                        <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
-                    </div>
-                    <div class="form-group">
-                        <label for="userGroup">
-                            <span class="glyphicon glyphicon-user"></span> 사용자그룹
-                        </label><br>
-                        <input type="radio" name="userGroup" value="1"> 관리자&nbsp;
-                        <input type="radio" name="userGroup" value="2"> 이벤트 주최자&nbsp;
-                        <input type="radio" name="userGroup" value="3"> 이벤트 참가자
-                    </div>
-                    <button type="submit" class="btn btn-block" id="signupBtn">Sign up
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </button>
-                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn pull-left" data-dismiss="modal">
                         <span class="glyphicon glyphicon-remove"></span> Cancel
@@ -195,12 +196,11 @@
 
     <!-- Update My Info -->
     <div class="container">
-
-        <h3 class="text-center" style="color: #000;">내 정보 수정</h3>
+        <h3 class="text-center" style="color: #000; padding-top: 50px">내 정보 수정</h3>
         <div>
-        <hr><br>
+        <hr>
         <div class="row test"  >
-            <div class="col-md-4" >
+            <div style="padding-left: 400px; padding-right: 400px">
                 <div class="row">
                     <div class="form-group">
                         <label for="signupPw">
@@ -225,8 +225,8 @@
                 </div>
 
                 <!-- 내 정보 수정, 취소, 탈퇴 -->
-                <div class="row">
-                    <div class="col-md-12 form-group center-block">
+                <div class="row"  style="padding-left: 110px; padding-right: 75px;">
+                    <div>
                         <br>
                         <button class="btn" type="submit" id="myInfoUpdateSubmitBtn">수정</button>&nbsp;&nbsp;
                         <button class="btn" type="reset" onclick="updateCancel()">취소</button>&nbsp;&nbsp;
@@ -240,7 +240,7 @@
     <!--                    <br>-->
     <!--                    -->
     <!--                </div>-->
-                </div>
+                </div><br><br><br><br>
             </div>
         </div>
         </div>

@@ -12,6 +12,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="javascripts/controller.js"></script>
+    <script>
+        idCheck = () => {
+
+        };
+    </script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -159,8 +164,14 @@
                         <label for="signupId">
                             <span class="glyphicon glyphicon-user"></span> ID
                         </label>
-                        <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+                        <div>
+                            <input type="text" class="form-control" id="signupId" onkeyup="idCheck()" placeholder="Enter your ID">
+                            <p></p>
+                            <button class="btn" style="float: right;" id="idCheck">중복체크</button>
+                            <p id="idCheckMsg"></p>
+                        </div>
                     </div>
+                    <br>
                     <div class="form-group">
                         <label for="signupPw">
                             <span class="glyphicon glyphicon-user"></span> Password
@@ -178,7 +189,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
                     </div>
-                    <button type="submit" class="btn btn-block" id="signupBtn" data-dismiss="modal">Sign up
+                    <button type="submit" class="btn btn-block" id="signupBtn" data-dismiss="modal">Sign Up
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </div>

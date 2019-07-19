@@ -24,6 +24,21 @@
             xhttp.open("GET", "/showTicketInfo?id=" + params, true);
             xhttp.send();
         }
+
+        function searchPayInfo(params) {
+            //alert(param);
+            var r = confirm("결제하시겠습니까?");
+
+            if (r == true) {
+                alert("경기 입장권을 구매하러 가십시다.");
+                window.open('/pay?id='+params,'_blank','resizable=yes, width=500, height=680');
+            } else {
+                alert("다른 경기를 검색합니다.");
+                window.location.href = "/searchEventInfo?searchEvent=";
+            }
+        }
+
+
     </script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -135,7 +150,7 @@
         </div>
 
         <!-- Third Container (Grid) -->
-        <div class="container-fluid bg-3 text-center">
+        <div class="container-fluid bg-3 text-center" style="padding-top: 0;">
             <div><hr>
     <!--        <div class="w3-panel w3-border">-->
                 <% for(let i = 0; event.length > i ;i++) { %>

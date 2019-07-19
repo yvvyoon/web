@@ -17,6 +17,31 @@ $(document).ready(function () {
         });
     });
 
+    // ID 중복체크
+    $("#idCheck").click(function() {
+        const signupId = $("#signupId").val();
+        const idCheckData = {
+            signupId,
+        };
+
+        if (!signupId) {
+            $("#idCheckMsg").html("<p style='float: right; color: red' id='idCheckMsg'>" + "ID를 입력한 후 중복체크를 하세요. &nbsp;&nbsp;&nbsp;&nbsp;</p>");
+        } else {
+            $.post("/idCheck", idCheckData, function (data, status) {
+                const parsedData = JSON.parse(data);
+
+                // 사용 가능한 ID일 때
+                if (parsedData.flag === 1) {
+                    $("#idCheckMsg").html("<p style='float: right; color: blue' id='idCheckMsg'>" + parsedData.msg + "&nbsp;&nbsp;&nbsp;&nbsp;</p>");
+                    // 동일한 ID가 존재할 때
+                } else if (parsedData.flag === 2) {
+                    $("#idCheckMsg").html("<p style='float: right; color: red' id='idCheckMsg'>" + parsedData.msg + "&nbsp;&nbsp;&nbsp;&nbsp;</p>");
+                    // ID가 입력되지 않았을 때
+                }
+            });
+        }
+    });
+
     // 로그인
     $("#loginBtn").click(function () {
         const loginId = $("#loginId").val();
@@ -135,6 +160,29 @@ $(document).ready(function () {
             }
         } else {
             window.location.href = "/myInfoUpdate";
+        }
+    });
+
+    // 티켓 구매
+    $("#pay_btn").click(function () {
+        const buyerId = document.getElementById("buyerId").innerHTML;
+        const ticketNumber = document.getElementById("ticketNum").innerHTML;
+        const ticketPrice = document.getElementById("ticketPrice").innerHTML;
+        const r = confirm("총 결제 토큰은"+ ticketPrice +" FNY 입니다.\n" + "결제하시겠습니까?");
+
+        if (r != true) {
+            alert("결제가 취소되었습니다.");
+        } else {
+            const send_params = {
+                buyerId,
+                ticketNumber,
+                ticketPrice
+            };
+            $.post("/trans", send_params, function (data, status) {
+                const parsedData = JSON.parse(data);
+
+                alert(parsedData.msg);
+            });
         }
     });
 
