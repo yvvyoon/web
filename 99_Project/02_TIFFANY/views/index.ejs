@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Theme Made By www.w3schools.com - No Copyright -->
     <title>TIFFANY</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,46 +11,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="javascripts/controller.js"></script>
-    <script>
-        idCheck = () => {
-
-        };
-    </script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">TIFFANY</a>
-            </div>
-            <div class="navbar-header" style="height: 50px; display: inline-block">
-                <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
-                    <table>
-                        <tr>
-                            <td style=" margin-top: 5px; margin-bottom: 5px;">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">TIFFANY</a>
+        </div>
+        <div class="navbar-header" style="height: 50px; display: inline-block">
+            <form action="/searchEventInfo" method="get" style="padding-top: 5px;">
+                <table>
+                    <tr>
+                        <td style=" margin-top: 5px; margin-bottom: 5px;">
                             <span style=" margin-bottom: 5px;">
-                                <input name="searchEvent" type="text" id="searchEvent" style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; " placeholder="이벤트 키워드를 입력하세요.">
+                                <input name="searchEvent" type="text" id="searchEvent"
+                                       style="text-indent: 5px; font-size: 15px; width: 500px; height: 40px; "
+                                       placeholder="이벤트 키워드를 입력하세요.">
                             </span>
-                            </td>
-                            <td style=" margin-bottom: 5px;">
+                        </td>
+                        <td style=" margin-bottom: 5px;">
                             <span style="margin-top: 5px; margin-bottom: 5px; padding-left: 5px;">
-                                <button class="glyphicon glyphicon-search" id="srchGlass" style="font-size: 2em; width:50px; height:40px;"></button>
+                                <button class="glyphicon glyphicon-search" id="srchGlass"
+                                        style="font-size: 2em; width:50px; height:40px;"></button>
                             </span>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <%
-                        if (loginState) {
-                            // 이벤트 주최자일 때
-                            if (loggedInUserGroupNum === 2) {
-                    %>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <%
+                if (loginState) {
+                    // 이벤트 주최자일 때
+                if (loggedInUserGroupNum === 2) {
+                %>
                     <li><a href="/eventRegist" id="eventRegistBtn">REGISTER</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                           style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
@@ -64,13 +62,14 @@
                             <br>
                         </ul>
                     </li>
-                    <%
-                        // 이벤트 참가자일 때
-                            } else if (loggedInUserGroupNum === 3) {
-                    %>
-                            <li><a href="/sell" id="sellBtn">SELL</a></li>
+                <%
+                    // 이벤트 참가자일 때
+                } else if (loggedInUserGroupNum === 3) {
+                %>
+                    <li><a href="/sell" id="sellBtn">SELL</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                           style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
@@ -83,13 +82,14 @@
                             <br>
                         </ul>
                     </li>
-                    <%
-                        // 관리자일 때
-                            } else {
-                    %>
+                <%
+                    // 관리자일 때
+                } else {
+                %>
                     <li><a href="/admin">ADMIN</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black !important;"><%= loggedInId %>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                           style="color: black !important;"><%= loggedInId %>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="loginDropdown">
@@ -101,252 +101,244 @@
                             <br>
                         </ul>
                     </li>
-                    <%
-                            }
-                        } else {
-                    %>
-                    <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal" data-target="#loginModal"> LOGIN</a></li>
-                    <%
-                        }
-                    %>
-                </ul>
+                <%
+                }
+                } else {
+                %>
+                    <li><a href="#" class="glyphicon glyphicon-log-in" role="button" data-toggle="modal"
+                           data-target="#loginModal"> LOGIN</a></li>
+                <%
+                }
+                %>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h4><span class="glyphicon glyphicon-lock"></span> LOGIN</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="loginId">
+                        <span class="glyphicon glyphicon-user"></span> ID
+                    </label>
+                    <input type="text" class="form-control" id="loginId" placeholder="Enter your ID">
+                </div>
+                <div class="form-group">
+                    <label for="loginPw"><span class="glyphicon glyphicon-user"></span> Password</label>
+                    <input type="password" class="form-control" id="loginPw" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn btn-block" id="loginBtn">Login
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn pull-left" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                </button>
+                <p>처음이신가요? <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
             </div>
         </div>
-    </nav>
+    </div>
+</div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" role="dialog">
-        <div class="modal-dialog">
+<!-- Sign Up Modal-->
+<div class="modal fade" id="signupModal" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                    <h4><span class="glyphicon glyphicon-lock"></span> LOGIN</h4>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="signupId">
+                        <span class="glyphicon glyphicon-user"></span> ID
+                    </label>
+                    <div>
+                        <input type="text" class="form-control" id="signupId" placeholder="Enter your ID">
+                        <p></p>
+                        <button class="btn" style="float: right;" id="idCheck">중복체크</button>
+                        <p id="idCheckMsg"></p>
+                    </div>
                 </div>
-                <div class="modal-body">
-                        <div class="form-group">
-                            <label for="loginId">
-                                <span class="glyphicon glyphicon-user"></span> ID
-                            </label>
-                            <input type="text" class="form-control" id="loginId" placeholder="Enter your ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="loginPw"><span class="glyphicon glyphicon-user"></span> Password</label>
-                            <input type="password" class="form-control" id="loginPw" placeholder="Enter your password">
-                        </div>
-                        <button type="submit" class="btn btn-block" id="loginBtn">Login
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button>
+                <br>
+                <div class="form-group">
+                    <label for="signupPw">
+                        <span class="glyphicon glyphicon-user"></span> Password
+                    </label>
+                    <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn pull-left" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-remove"></span> Cancel
-                    </button>
-                    <p>처음이신가요? <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="signupPwRepeat"
+                           placeholder="Enter your password repeat">
                 </div>
+                <div class="form-group">
+                    <label for="userGroup">
+                        <span class="glyphicon glyphicon-user"></span> 사용자그룹
+                    </label><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="1">&nbsp;&nbsp;관리자<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
+                </div>
+                <button type="submit" class="btn btn-block" id="signupBtn" data-dismiss="modal">Sign Up
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn pull-left" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="images/campnou.jpg" alt="Camp Nou">
+        </div>
+        <div class="item">
+            <img src="images/bernabeu.jpg" alt="Santiago Bernabeu">
+        </div>
+        <div class="item">
+            <img src="images/wanda.jpg" alt="Wanda Metropolitano">
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!-- Container (Event Section) -->
+<div id="tour" class="bg-1">
+    <div class="container">
+        <h3 class="text-center">EVENTS</h3>
+        <hr>
+        <br>
+        <h1 class="row text-left">Sports</h1><br>
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <img class="cateImg" src="images/football.jpg" id="footballImg" alt="football" width="300" height="200">
+            </div>
+            <div class="col-sm-4">
+                <img class="cateImg" src="images/basketball.jpg" id="basketballImg" alt="basketball" width="300"
+                     height="200">
+            </div>
+            <div class="col-sm-4">
+                <img class="cateImg" src="images/baseball.jpg" id="baseballImg" alt="baseball" width="300" height="200">
+            </div>
+        </div>
+        <br><br>
+        <h1 class="row text-left">Concert</h1><br>
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <img class="cateImg" src="images/concert.jpg" id="concertImg" alt="concert" width="300" height="200">
+            </div>
+            <div class="col-sm-4">
+                <img class="cateImg" src="images/musical.jpg" id="musicalImg" alt="musical" width="300" height="200">
             </div>
         </div>
     </div>
 
-    <!-- Sign Up Modal-->
-    <div class="modal fade" id="signupModal" role="dialog">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                    <h4><span class="glyphicon glyphicon-lock"></span> SIGN UP</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> Tickets</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="signupId">
-                            <span class="glyphicon glyphicon-user"></span> ID
-                        </label>
-                        <div>
-                            <input type="text" class="form-control" id="signupId" onkeyup="idCheck()" placeholder="Enter your ID">
-                            <p></p>
-                            <button class="btn" style="float: right;" id="idCheck">중복체크</button>
-                            <p id="idCheckMsg"></p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="signupPw">
-                            <span class="glyphicon glyphicon-user"></span> Password
-                        </label>
-                        <input type="password" class="form-control" id="signupPw" placeholder="Enter your password">
+                        <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Tickets, $23 per
+                            person</label>
+                        <input type="number" class="form-control" id="psw" placeholder="How many?">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="signupPwRepeat" placeholder="Enter your password repeat">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
                     </div>
-                    <div class="form-group">
-                        <label for="userGroup">
-                            <span class="glyphicon glyphicon-user"></span> 사용자그룹
-                        </label><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="1">&nbsp;&nbsp;관리자<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="2">&nbsp;&nbsp;이벤트 주최자<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="userGroup" value="3">&nbsp;&nbsp;이벤트 참가자<br>
-                    </div>
-                    <button type="submit" class="btn btn-block" id="signupBtn" data-dismiss="modal">Sign Up
+                    <button type="submit" class="btn btn-block">Pay
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn pull-left" data-dismiss="modal">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
                         <span class="glyphicon glyphicon-remove"></span> Cancel
                     </button>
+                    <p>Need <a href="#">help?</a></p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+<!-- Container (Contact Section) -->
+<div id="contact" class="container">
+    <br>
+    <h5 class="text-center">TIFFANY</h5>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">김민재</a></li>
+        <li><a data-toggle="tab" href="#menu1">최재성</a></li>
+        <li><a data-toggle="tab" href="#menu2">신영찬</a></li>
+        <li><a data-toggle="tab" href="#menu3">윤영욱</a></li>
+    </ul>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="images/campnou.jpg" alt="Camp Nou">
-<!--                <div class="carousel-caption">-->
-<!--                    <h3>Milano Derby</h3>-->
-<!--                    <p>Get tickets</p>-->
-<!--                </div>-->
-            </div>
-            <div class="item">
-                <img src="images/bernabeu.jpg" alt="Santiago Bernabeu">
-<!--                <div class="carousel-caption">-->
-<!--                    <h3>North London Derby</h3>-->
-<!--                    <p>Get tickets</p>-->
-<!--                </div>-->
-            </div>
-            <div class="item">
-                <img src="images/wanda.jpg" alt="Wanda Metropolitano">
-<!--                <div class="carousel-caption">-->
-<!--                    <h3>El Clasico</h3>-->
-<!--                    <p>Get tickets</p>-->
-<!--                </div>-->
-            </div>
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h2>Minjae, Kim</h2>
+            <p>노랑통닭 덕후</p>
         </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
-    <!-- Container (Event Section) -->
-    <div id="tour" class="bg-1">
-        <div class="container">
-            <h3 class="text-center">EVENTS</h3>
-            <hr><br>
-            <h1 class="row text-left">Sports</h1><br>
-            <div class="row text-center">
-                <div class="col-sm-4">
-                    <img class="cateImg" src="images/football.jpg" id="footballImg" alt="football" width="300" height="200">
-                </div>
-                <div class="col-sm-4">
-                    <img class="cateImg" src="images/basketball.jpg" id="basketballImg" alt="basketball" width="300" height="200">
-                </div>
-                <div class="col-sm-4">
-                    <img class="cateImg" src="images/baseball.jpg" id="baseballImg" alt="baseball" width="300" height="200">
-                </div>
-            </div>
-            <br><br>
-            <h1 class="row text-left">Concert</h1><br>
-            <div class="row text-center">
-                <div class="col-sm-4">
-                    <img class="cateImg" src="images/concert.jpg" id="concertImg" alt="concert" width="300" height="200">
-                </div>
-                <div class="col-sm-4">
-                    <img class="cateImg" src="images/musical.jpg" id="musicalImg" alt="musical" width="300" height="200">
-                </div>
-            </div>
+        <div id="menu1" class="tab-pane fade">
+            <h2>Jaeseong, Choi</h2>
+            <p>아이디어 채굴자</p>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h4><span class="glyphicon glyphicon-lock"></span> Tickets</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Tickets, $23 per
-                                person</label>
-                            <input type="number" class="form-control" id="psw" placeholder="How many?">
-                        </div>
-                        <div class="form-group">
-                            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
-                            <input type="text" class="form-control" id="usrname" placeholder="Enter email">
-                        </div>
-                        <button type="submit" class="btn btn-block">Pay
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-                            <span class="glyphicon glyphicon-remove"></span> Cancel
-                        </button>
-                        <p>Need <a href="#">help?</a></p>
-                    </div>
-                </div>
-            </div>
+        <div id="menu2" class="tab-pane fade">
+            <h2>Youngchan, Shin</h2>
+            <p>걸어다니는 JDK</p>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <h2>Youngwook, Yoon</h2>
+            <p>스토리텔링 선두주자</p>
         </div>
     </div>
+</div>
 
-    <!-- Container (Contact Section) -->
-    <div id="contact" class="container">
-        <br>
-        <h5 class="text-center">TIFFANY</h5>
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">김민재</a></li>
-            <li><a data-toggle="tab" href="#menu1">최재성</a></li>
-            <li><a data-toggle="tab" href="#menu2">신영찬</a></li>
-            <li><a data-toggle="tab" href="#menu3">윤영욱</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <h2>Minjae, Kim</h2>
-                <p>노랑통닭 덕후</p>
-            </div>
-            <div id="menu1" class="tab-pane fade">
-                <h2>Jaeseong, Choi</h2>
-                <p>아이디어 채굴자</p>
-            </div>
-            <div id="menu2" class="tab-pane fade">
-                <h2>Youngchan, Shin</h2>
-                <p>걸어다니는 JDK</p>
-            </div>
-            <div id="menu3" class="tab-pane fade">
-                <h2>Youngwook, Yoon</h2>
-                <p>스토리텔링 선두주자</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <a class="up-arrow" href="#" data-toggle="tooltip" title="TO TOP">
-            <span class="glyphicon glyphicon-chevron-up"></span>
-        </a><br><br>
-        <p>Copyright 2019. Team TIFFANY. All rights reserved.</p>
-    </footer>
+<!-- Footer -->
+<footer class="text-center">
+    <a class="up-arrow" href="#" data-toggle="tooltip" title="TO TOP">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <p>Copyright 2019. Team TIFFANY. All rights reserved.</p>
+</footer>
 </body>
 </html>

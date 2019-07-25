@@ -24,7 +24,6 @@ let data = {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-
     const result = { msg: '회원가입 오류' };
     const con = mysql.createConnection({
         host: 'localhost',

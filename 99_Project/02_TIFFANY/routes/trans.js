@@ -18,7 +18,6 @@ let ticket = {
 };
 
 router.post('/', function (req, res, next) {
-
     const payResult = {
         msg: "",
     };
@@ -52,8 +51,7 @@ router.post('/', function (req, res, next) {
                 con.query(sql2, (err, rs, fields) => {
                     if (err) {
                         console.log(err.message);
-                    }
-                    else {
+                    } else {
                         len = rs.length;
                         console.log("id 일치하는 구매자수 =", len);
                         buyer.buyer_id = rs[0].USER_ID;
@@ -62,27 +60,25 @@ router.post('/', function (req, res, next) {
 
 
                         console.log("DB3 구매자 토큰 감소");
-                        const ticket_price1=parseInt(req.body.ticketPrice);
-                        let updatedBuyerToken = buyer.buyer_token- ticket_price1;
+                        const ticket_price1 = parseInt(req.body.ticketPrice);
+                        let updatedBuyerToken = buyer.buyer_token - ticket_price1;
                         console.log(updatedBuyerToken);
-                        const sql3 = "UPDATE user SET POSS_TOKEN_QTY=" +updatedBuyerToken+" where USER_NUM="+buyer.buyer_num;
+                        const sql3 = "UPDATE user SET POSS_TOKEN_QTY=" + updatedBuyerToken + " where USER_NUM=" + buyer.buyer_num;
                         console.log(sql3);
                         con.query(sql3, (err, rs, fields) => {
                             if (err) {
                                 console.log(err.message);
-                            }
-                            else {
+                            } else {
                                 console.log("update!");
                                 console.log("ticket.ticket_buyer_num : " + ticket.ticket_buyer_num);
 
                                 console.log("DB4 판매자 토큰보유량 조회");
-                                const sql4 = "select * from USER where USER_NUM like "+ ticket.ticket_buyer_num;
+                                const sql4 = "select * from USER where USER_NUM like " + ticket.ticket_buyer_num;
                                 console.log(sql4);
                                 con.query(sql4, (err, rs, fields) => {
                                     if (err) {
                                         console.log(err.message);
-                                    }
-                                    else {
+                                    } else {
                                         len = rs.length;
                                         console.log("id 일치하는 판매자수 =", len);
 
@@ -92,31 +88,29 @@ router.post('/', function (req, res, next) {
 
 
                                         console.log("DB5 구매자 토큰 증가");
-                                        const saler1=parseInt(saler.saler_token);
-                                        const ticketprice_=parseInt(req.body.ticketPrice);
+                                        const saler1 = parseInt(saler.saler_token);
+                                        const ticketprice_ = parseInt(req.body.ticketPrice);
 
                                         const updatedSalerToken = saler1 + ticketprice_;
-                                        const sql5 = "UPDATE user SET POSS_TOKEN_QTY="+updatedSalerToken+" where USER_NUM="+saler.saler_num;
+                                        const sql5 = "UPDATE user SET POSS_TOKEN_QTY=" + updatedSalerToken + " where USER_NUM=" + saler.saler_num;
                                         console.log(sql5);
                                         con.query(sql5, (err, rs, fields) => {
                                             if (err) {
                                                 console.log(err.message);
-                                            }
-                                            else {
+                                            } else {
                                                 len = rs.length;
                                                 console.log("id 일치하는 구매자수 =", len);
 
                                                 console.log("DB6 거래장부에 거래 내역 추가");
-                                                const d=new Date();
+                                                const d = new Date();
 
-                                                console.log("현재시각: ",d);
+                                                console.log("현재시각: ", d);
                                                 const sql6 = "INSERT INTO TRANS_HIST(TICKET_NUM, SALER_NUM, BUYR_NUM, TRANS_PRC, TRANS_DTTM) VALUES(" + ticket.ticket_num + ", " + saler.saler_num + ', ' + buyer.buyer_num + ', ' + req.body.ticketPrice + ', SYSDATE())';
                                                 console.log(sql6);
                                                 con.query(sql6, (err, rs, fields) => {
                                                     if (err) {
                                                         console.log(err.message);
-                                                    }
-                                                    else {
+                                                    } else {
 
                                                         payResult.msg = `성공적으로 결제되었습니다.`;
                                                         res.json(JSON.stringify(payResult));
@@ -137,8 +131,6 @@ router.post('/', function (req, res, next) {
                 });//query2
             }//sql1_if
         });//query1
-
-
     });
 });
 
