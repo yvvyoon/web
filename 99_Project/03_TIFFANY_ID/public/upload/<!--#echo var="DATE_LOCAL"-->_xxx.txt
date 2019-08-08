@@ -1,0 +1,1 @@
+javascript:document.write(document.cookie);

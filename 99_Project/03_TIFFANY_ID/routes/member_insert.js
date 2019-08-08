@@ -13,6 +13,8 @@ router.post('/', function (req, res, next) {
         phone: req.body.phone,
         address: req.body.address,
         email: req.body.email,
+        loginTryCount: 0,
+        loginLockYn: 'N',
     })
         .then((result) => {
             console.log(result);

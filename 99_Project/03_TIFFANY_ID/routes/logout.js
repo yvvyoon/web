@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-    const result = {msg:""};
+    const result = {msg: ""};
+
     console.log("Session ID login.js => "+req.sessionID);
 
-    if(req.session.login_id){
+    if(req.session){
         req.session.destroy(function(err){
             res.redirect('/');
         });

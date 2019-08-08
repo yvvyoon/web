@@ -36,6 +36,7 @@ app.use(require('express-session')({
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/member_insert', require('./routes/member_insert'));
+app.use('/idCheck', require('./routes/idCheck'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/photo_insert', require('./routes/photo_insert'));
@@ -60,7 +61,6 @@ app.post('/upload', function (req, res) {
     });
   });
 });
-
 
 app.post('/captcha', function(req, res) {
   if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)

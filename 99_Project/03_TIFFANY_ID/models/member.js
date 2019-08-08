@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(255),
             allowNull: true,
         },
+        loginTryCount: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        loginLockYn: {
+            type: DataTypes.STRING(1),
+            allowNull: true,
+        }
     }, {
         timestamps: true,
     });
