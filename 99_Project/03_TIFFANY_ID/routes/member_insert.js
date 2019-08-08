@@ -1,14 +1,21 @@
 var express = require('express');
 var router = express.Router();
 const Member = require('../models').Member;
+const crypto = require('crypto');
 
 router.post('/', function (req, res, next) {
     const result = {msg: 'Sign up Error'};
+    // salt값
+    const secret = req.body.name;
+    const hash = crypto.createHmac('sha256', secret)
+        .update(req.body.password)
+        .digest('hex');
+    //hashing하기
 
     Member.create({
         user_id: req.body.id,
         name: req.body.name,
-        password: req.body.password,
+        password: hash,
         identity_num: req.body.id_num,
         phone: req.body.phone,
         address: req.body.address,

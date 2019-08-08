@@ -9,6 +9,22 @@
         <link rel="stylesheet" href="stylesheets/css/noscript.css"/>
     </noscript>
     <link rel="stylesheet" href="stylesheets/css/map.css">
+    <script>
+        let phone_field_length = 0;
+
+        function TabNext(obj, event, len, next_field) {
+            if (event === "down") {
+                phone_field_length = obj.value.length;
+            } else if (event === "up") {
+                if (obj.value.length != phone_field_length) {
+                    phone_field_length = obj.value.length;
+                    if (phone_field_length == len) {
+                        next_field.focus();
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body onload="geoLocation()" class="is-preload">
 
@@ -169,6 +185,7 @@
 
 
         <!-- Sign up -->
+        <!-- Sign up -->
         <article id="signup">
             <h2 class="major">Sign up</h2>
             <div id="sign_up_div">
@@ -176,11 +193,11 @@
                     <div class="fields">
                         <div class="field half">
                             <label for="name">ID</label>
-                            <input type="text" name="id" id="id"/>
+                            <input type="text" name="id" id="id" />
                         </div>
                         <div class="field quarter">
                             <label for="name">&nbsp;</label>
-                            <input type="button" value="id중복검사" id="idCheck"/>
+                            <input type="button" value="id중복검사" id="idCheck" />
                         </div>
                         <div class="field quarter">
                             <label for="name">&nbsp;</label>
@@ -190,44 +207,53 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" id="password" onchange="pwdCheck();"/>
                         </div>
-                        <div class="field half">
+                        <div class="field">
                             <label for="name">Name</label>
-                            <input type="text" name="name" id="name"/>
+                            <input type="text" name="name" id="name" />
                         </div>
-                        <div class="field half">
+                        <div class="field third">
                             <label for="phone">Phone</label>
-                            <input type="tel" name="phone" id="phone"/>
+                            <input type="tel" name="phone_1" id="phone_1" maxlength="3"onKeyDown="TabNext(this,'down',3)"
+                                   onKeyUp="TabNext(this,'up',3,phone_2)"/>
+                        </div>
+                        <div class="field third">
+                            <label for="phone">&nbsp;</label>
+                            <input type="tel" name="phone_2" id="phone_2" maxlength="4" onKeyDown="TabNext(this,'down',4)"
+                                   onKeyUp="TabNext(this,'up',4,phone_3)"/>
+                        </div>
+                        <div class="field third">
+                            <label for="phone">&nbsp;</label>
+                            <input type="tel" name="phone_3" id="phone_3" maxlength="4"/>
                         </div>
                         <div class="field half">
                             <label for="birth">Identity num</label>
-                            <input type="text" name="id_num" id="id_num"/>
+                            <input type="text" name="id_num_1" id="id_num_1" maxlength="6"onKeyDown="TabNext(this,'down',6)"
+                                   onKeyUp="TabNext(this,'up',6,id_num_2)"/>
                         </div>
                         <div class="field half">
+                            <label for="birth">&nbsp;</label>
+                            <input type="text" name="id_num_2" id="id_num_2" maxlength="7"/>
+                        </div>
+                        <div class="field">
                             <label for="email">Email</label>
-                            <input type="text" name="email" id="email"/>
+                            <input type="text" name="email" id="email" />
                         </div>
                         <div class="field">
                             <label for="address">Address</label>
                             <textarea name="address" id="address" rows="2"></textarea>
                         </div>
-
                     </div>
-
-
                     <div class="g-recaptcha" data-sitekey="6LeqiLAUAAAAACrGcY3uPKu-u1G0Ay__8OQh0AV-"></div>
-
-
                     <div style="float:right">
                         <ul class="actions">
                             <!-- <li><input type="reset" value="Reset" /></li> -->
 
-                            <li><input id="signup_btn" type="submit" value="Sign Up" class="primary"/></li>
+                            <li><input id="signup_btn"type="submit" value="Sign Up" class="primary" /></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </article>
-
 
         <!--Modify information-->
         <article id="modify">

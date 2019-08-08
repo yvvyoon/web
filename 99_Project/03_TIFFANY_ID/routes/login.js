@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Member = require('../models').Member;
+const crypto = require('crypto');
 
 router.post('/', function (req, res, next) {
     const loginResult = {
@@ -33,6 +34,11 @@ router.post('/', function (req, res, next) {
         },
     })
         .then((rslt) => {
+            const secret = rslt.name;				//secret값을 rslt에서 name을 가져옴
+            const hash = crypto.createHmac('sha256', secret)		//login페이지에서 입력한 pwd를 해싱
+                .update(req.body.login_pwd)
+                .digest('hex');
+
             // ID 불일치
             if (rslt === null || rslt === undefined) {
                 loginResult.flag = 2;
@@ -71,7 +77,7 @@ router.post('/', function (req, res, next) {
                             });
                     } else {
                         // 패스워드 불일치
-                        if (rslt.password !== req.body.login_pwd) {
+                        if (rslt.password !== hash) {
                             loginResult.flag = 3;
                             loginResult.msg = "패스워드가 일치하지 않습니다.";
 
@@ -106,8 +112,13 @@ router.post('/', function (req, res, next) {
                             const s_num = rslt.identity_num.split("");
                             let id_num = "";
 
-                            for (let i = 0; i < 8; i++) {
+                            for (let i = 0; i < 6; i++) {
                                 id_num += s_num[i];
+                            }
+
+                            let id_num_2nd = "";						//주민번호 뒷자리 1개를 추출
+                            for(let i=6;i<7;i++){
+                                id_num_2nd+=s_num[i];
                             }
 
                             let id_num1 = rslt.identity_num;
@@ -116,7 +127,8 @@ router.post('/', function (req, res, next) {
                             let dd = id_num1.substr(4, 2);
                             let date = yy + "." + mm + "." + dd;
 
-                            req.session.id_num = id_num + "******";
+                            //main페이지에서 주민번호가 나오는 양식
+                            req.session.id_num = id_num +"-"+id_num_2nd +"******";
                             req.session.id_num1 = date;
                             req.session.password = rslt.password;
                             req.session.phone = rslt.phone;

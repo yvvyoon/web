@@ -5,8 +5,8 @@ $(document).ready(function () {
         const id = $("#id").val();
         const name = $("#name").val();
         const password = $("#password").val();
-        const id_num = $("#id_num").val();
-        const phone = $("#phone").val();
+        const id_num = $("#id_num_1").val()+$("#id_num_2").val();
+        const phone = $("#phone_1").val()+$("#phone_2").val()+$("#phone_3").val();
         const address = $("#address").val();
         const email = $("#email").val();
         const send_params = {
