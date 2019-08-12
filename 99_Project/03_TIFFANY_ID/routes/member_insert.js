@@ -4,7 +4,10 @@ const Member = require('../models').Member;
 const crypto = require('crypto');
 
 router.post('/', function (req, res, next) {
-    const result = {msg: 'Sign up Error'};
+    const result = {
+        flag: 0,
+        msg: 'Sign up Error',
+    };
     // salt값
     const secret = req.body.name;
     const hash = crypto.createHmac('sha256', secret)

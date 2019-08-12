@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
         address: req.session.address,
         email: req.session.email,
         photo_path: req.session.photo_path,
-        newpath: req.session.newpath
+        newpath: req.session.newpath,
     });
 });
 

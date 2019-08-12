@@ -1,12 +1,15 @@
 $(document).ready(function () {
     let signupFlag = false;
+    let idCheckFlag = false;
+    let pwCheckFlag = false;
+    let recaptchaFlag = false;
 
     $("#signup_btn").click(function () {
         const id = $("#id").val();
         const name = $("#name").val();
         const password = $("#password").val();
-        const id_num = $("#id_num_1").val()+$("#id_num_2").val();
-        const phone = $("#phone_1").val()+$("#phone_2").val()+$("#phone_3").val();
+        const id_num = $("#id_num_1").val() + $("#id_num_2").val();
+        const phone = $("#phone_1").val() + $("#phone_2").val() + $("#phone_3").val();
         const address = $("#address").val();
         const email = $("#email").val();
         const send_params = {
@@ -19,15 +22,17 @@ $(document).ready(function () {
             email
         };
 
+        signupFlag = idCheckFlag && pwCheckFlag && recaptchaFlag;
+
         /* 서브밋 전에 리캡챠 체크 여부 를 확인합니다. */
         if (grecaptcha.getResponse() == "") {
             alert("리캡챠를 체크해야 합니다.");
 
-            signupFlag = false;
+            recaptchaFlag = false;
 
             return false;
         } else {
-            signupFlag = true;
+            recaptchaFlag = true;
 
             if (signupFlag === true) {
                 $.post('/member_insert', send_params, function (data, status) {
@@ -44,7 +49,7 @@ $(document).ready(function () {
     });//signup_btn
 
     // ID 중복체크
-    $("#idCheck").click(function() {
+    $("#idCheck").click(function () {
         const signupId = $("#id").val();
         const idCheckData = {
             signupId,
@@ -52,6 +57,8 @@ $(document).ready(function () {
 
         if (!signupId) {
             $("#idCheckMsg").html("<p style='float: right; color: red' id='idCheckMsg'>" + "ID를 입력한 후 중복체크를 하세요.</p>");
+
+            idCheckFlag = false;
         } else {
             $.post("/idCheck", idCheckData, function (data, status) {
                 console.log("IDCHECK_POST_TEST");
@@ -60,9 +67,13 @@ $(document).ready(function () {
                 // 사용 가능한 ID일 때
                 if (parsedData.flag === 1) {
                     $("#idCheckMsg").html("<p style='float: right; color: white' id='idCheckMsg'>" + parsedData.msg + "</p>");
+
+                    idCheckFlag = true;
                     // 동일한 ID가 존재할 때
                 } else if (parsedData.flag === 2) {
                     $("#idCheckMsg").html("<p style='float: right; color: red' id='idCheckMsg'>" + parsedData.msg + "</p>");
+
+                    idCheckFlag = false;
                 }
             });
         }
@@ -75,15 +86,15 @@ $(document).ready(function () {
         if (!pwdCheck.test(password)) {
             alert("패스워드는 문자, 숫자, 특수문자의 조합으로 입력하세요.");
 
-            signupFlag = false;
+            pwCheckFlag = false;
         }
 
         if (password.length < 8 || password.length > 20) {
             alert("패스워드는 8자리 이상, 20자리 이하로 입력하세요.");
 
-            signupFlag = false;
+            pwCheckFlag = false;
         } else {
-            signupFlag = true;
+            pwCheckFlag = true;
         }
     });
 
@@ -119,7 +130,6 @@ $(document).ready(function () {
                     case 4:
                         // 로그인 차단
                         alert(parsed_data.msg);
-                        alert(parsed_data.tryMsg);
                         window.location.assign("/");
                         break;
                 }
@@ -154,12 +164,14 @@ $(document).ready(function () {
 
     $("#modify_submit_btn").click(function () {
         const password = $("#m_password").val();
+        const new_password = $("#new_password_confirm").val();
         const name = $("#m_name").val();
         const phone = $("#m_phone").val();
         const email = $("#m_email").val();
         const address = $("#m_address").val();
         const send_params = {
             password,
+            new_password,
             name,
             phone,
             email,
@@ -169,13 +181,20 @@ $(document).ready(function () {
         $.post('/modify', send_params, function (data, status) {
             const parsed_data = JSON.parse(data);
 
-            window.location.assign("/");
+            if (parsed_data.flag === false) {
+                alert(parsed_data.msg);
+
+                window.location.reload(true);
+            } else {
+                window.location.assign("/");
+            }
         });//post
     });//modify_submit_btn
 
     let withdrawYn1 = false;
     let withdrawYn2 = false;
     let withdrawYn3 = false;
+
     $("#delete_btn").click(function () {
         withdrawYn1 = confirm("탈퇴하실건가요?");
 
@@ -198,5 +217,34 @@ $(document).ready(function () {
         } else {
             window.location.href = "/#modify";
         }
+    });
+
+    $("#recert1").click(function () {
+        $.get('/recert?nm=recert1',function (data, status) {
+            window.location.assign('/#recert');
+        });
+    });
+
+    $("#recert2").click(function () {
+        $.get('/recert?nm=recert2',function (data, status) {
+            window.location.assign('/#recert');
+        });
+    });
+
+    $("#recertPwBtn").click(function () {
+        const recertPw = $("#recertPw").val();
+        const send_params = {
+            recertPw,
+        };
+
+        $.post("/recert", send_params, function (data, status) {
+            const parsedData = JSON.parse(data);
+
+            if (parsedData.prevPage === 'recert1') {
+                window.location.assign("/#modify");
+            } else {
+                window.location.assign("/#id_update");
+            }
+        });
     });
 });

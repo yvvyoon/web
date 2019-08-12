@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TIFFANY</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="stylesheets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="stylesheets/css/noscript.css"/>
+    </noscript>
+    <link rel="stylesheet" href="stylesheets/css/map.css">
+</head>
+<body onload="geoLocation()" class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">
+                <span class="icon fa-gem"></span>
+            </div>
+            <br>
+            <div class="content">
+                <div class="inner">
+                    <%
+                    if(loginState){
+                    %>
+                        <h1><%= name %></h1>
+                        <p><%= id_num %></p>
+                    <%
+                    }else{
+                    %>
+                        <h1>TIFFANY</h1>
+                        <p>Ticket Is Fair For Anyone aNd You</p>
+                    <%
+                    }
+                    %>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <%
+                    if(loginState){
+                    %>
+                        <li><a href="#intro">You are</a></li>
+                        <li><a href="#" id="recert1">ID Update</a></li>
+                        <li><a href="http://70.12.224.42:3000">Ticket</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    <%
+                    }else{
+                    %>
+                        <li><a href="#intro">We are</a></li>
+                        <li><a href="#login">Login</a></li>
+                        <li><a href="#signup">Sign Up</a></li>
+                        <li><a href="#recert">Contact</a></li>
+                    <%
+                    }
+                    %>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Intro -->
+            <%
+            if(loginState){
+            %>
+
+                <article id="intro">
+                    <h2 class="major"><%= name %></h2>
+                    <%
+                    if(photo_path){
+                    %>
+                        <span class="image main"><img src="<%= photo_path %>" style="width:200px;height:200px;"/></span>
+                    <%
+                    }else{
+                    %>
+                        <div style="text-align: center; padding:50px;"><h1>사진을 등록해주세요</h1></div>
+                    <%
+                    }
+                    %>
+                    <table>
+                        <tr>
+                            <td>ID</td>
+                            <td><%= id %></td>
+                        </tr>
+                        <tr>
+                            <td>NAME</td>
+                            <td><%= name %></td>
+                        </tr>
+                        <tr>
+                            <td>BIRTH DATE</td>
+                            <td><%= id_num1 %></td>
+                        </tr>
+                        <tr>
+                            <td>PHONE</td>
+                            <td><%= phone %></td>
+                        </tr>
+                        <tr>
+                            <td>EMAIL</td>
+                            <td><%= email %></td>
+                        </tr>
+                        <tr>
+                            <td>ADDRESS</td>
+                            <td><%= address %></td>
+                        </tr>
+                    </table>
+                    <ul>
+                        <button style="float:right;" id="modify_btn"><a href="#modify">Modify</a></button>
+                    </ul>
+                    </nav>
+                </article>
+            <%
+            }else{
+            %>
+                <article id="intro">
+                    <h2 class="major">WE ARE</h2>
+                    <span class="image sub"><img src="images/pic01.jpeg"
+                                                 style="height:300px; width:500px; margin:30px;"/></span>
+                    <table>
+                        <th colspan="2">TIFFANY</th>
+                        <tr>
+                            <td class="rowS" rowspan="2">ID CHECK PAGE</td>
+                            <td>김민재</td>
+                        </tr>
+                        <tr>
+                            <td>최재성</td>
+                        </tr>
+                        <tr>
+                            <td class="rowS" rowspan="2">TICKET PAGE</td>
+                            <td>윤영욱</td>
+                        </tr>
+                        <tr>
+                            <td>신영찬</td>
+                        </tr>
+                    </table>
+
+                </article>
+            <%
+            }
+            %>
+
+            <!-- Login -->
+            <article id="login">
+                <h2 class="major">Login</h2>
+                <div id="login_div" class="form" action="#">
+                    <div class="fields">
+                        <div class="field">
+                            <label for="ID">ID</label>
+                            <input type="text" name="login_id" id="login_id"/>
+                        </div>
+                        <div class="field">
+                            <label for="email">Password</label>
+                            <input type="password" name="login_pwd" id="login_pwd"/>
+                        </div>
+                    </div>
+                    <div style="float:right">
+                        <ul class="actions">
+                            <!-- <li><input type="reset" value="Reset" /></li> -->
+                            <li><input id="login_btn" type="submit" value="Login" class="primary"/></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Sign up -->
+            <article id="signup">
+                <h2 class="major">Sign up</h2>
+                <div id="sign_up_div">
+                    <div class="form">
+                        <div class="fields">
+                            <div class="field half">
+                                <label for="name">ID</label>
+                                <input type="text" name="id" id="id" />
+                            </div>
+                            <div class="field quarter">
+                                <label for="name">&nbsp;</label>
+                                <input type="button" value="id중복검사" id="idCheck" />
+                            </div>
+                            <div class="field quarter">
+                                <label for="name">&nbsp;</label>
+                                <span id="idCheckMsg"></span>
+                            </div>
+                            <div class="field">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" onchange="pwdCheck();"/>
+                            </div>
+                            <div class="field">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" />
+                            </div>
+                            <div class="field third">
+                                <label for="phone">Phone</label>
+                                <input type="tel" name="phone_1" id="phone_1" maxlength="3"onKeyDown="TabNext(this,'down',3)"
+                                       onKeyUp="TabNext(this,'up',3,phone_2)"/>
+                            </div>
+                            <div class="field third">
+                                <label for="phone">&nbsp;</label>
+                                <input type="tel" name="phone_2" id="phone_2" maxlength="4" onKeyDown="TabNext(this,'down',4)"
+                                       onKeyUp="TabNext(this,'up',4,phone_3)"/>
+                            </div>
+                            <div class="field third">
+                                <label for="phone">&nbsp;</label>
+                                <input type="tel" name="phone_3" id="phone_3" maxlength="4"/>
+                            </div>
+                            <div class="field half">
+                                <label for="birth">Identity num</label>
+                                <input type="text" name="id_num_1" id="id_num_1" maxlength="6"onKeyDown="TabNext(this,'down',6)"
+                                       onKeyUp="TabNext(this,'up',6,id_num_2)"/>
+                            </div>
+                            <div class="field half">
+                                <label for="birth">&nbsp;</label>
+                                <input type="text" name="id_num_2" id="id_num_2" maxlength="7"/>
+                            </div>
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" id="email" />
+                            </div>
+                            <div class="field">
+                                <label for="address">Address</label>
+                                <textarea name="address" id="address" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="6LeqiLAUAAAAACrGcY3uPKu-u1G0Ay__8OQh0AV-"></div>
+                        <div style="float:right">
+                            <ul class="actions">
+                                <!-- <li><input type="reset" value="Reset" /></li> -->
+
+                                <li><input id="signup_btn"type="submit" value="Sign Up" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!--Modify information-->
+            <article id="modify">
+                <h2 class="major"><%= name %></h2>
+                <span class="image main"><img src="<%= photo_path %>" style="width:200px;height:200px;"/></span>
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td><%= id %></td>
+                    </tr>
+                    <tr>
+                        <td>PASSWORD</td>
+                        <td><input id="m_password" type="text" placeholder="비밀번호를 입력해주세요!"></td>
+                    </tr>
+                    <tr>
+                        <td>NAME</td>
+                        <td><input id="m_name" type="text" value=<%= name %>></td>
+                    </tr>
+                    <tr>
+                        <td>BIRTH DATE</td>
+                        <td><%= id_num1 %></td>
+                    </tr>
+                    <tr>
+                        <td>PHONE</td>
+                        <td><input id="m_phone" type="text" value=<%= phone %>></td>
+                    </tr>
+                    <tr>
+                        <td>EMAIL</td>
+                        <td><input id="m_email" type="email" value=<%= email %>></td>
+                    </tr>
+                    <tr>
+                        <td>ADDRESS</td>
+                        <td><input id="m_address" type="text" value=<%= address %>></td>
+                    </tr>
+                </table>
+                <ul style="float:right" class="actions">
+                    <li><input id="delete_btn" type="submit" value="Delete"/></li>
+                    <li><input id="modify_submit_btn" type="submit" value="COMPLETE" class="primary"/></li>
+                </ul>
+            </article>
+
+            <!-- photo_update -->
+            <article id="id_update">
+                <h2 class="major"><%= name %>'s Photo Update</h2>
+                <form action='/upload' method='post' encType="multipart/form-data" class="form">
+                    <div class="field form">
+                        <label for="photo">ID Photo Upload</label>
+                        <input type="file" name="id_photo_name" id="id_photo"/>
+                    </div>
+                    <button type="submit" id="photo_btn" class="primary"/>
+                    Upload!
+                </form>
+            </article>
+
+            <!-- Recertification -->
+            <article id="recert">
+                <h2 class="major">Recertification</h2>
+                <div class="field form">
+                    <label for="photo">본인확인을 위해 패스워드를 입력하세요.</label>
+                    <input type="password" name="recertPw" id="recertPw"/>
+                </div>
+                <div style="float: right">
+                    <button type="submit" id="recertPwBtn" class="primary"/>Next
+                </div>
+            </article>
+
+            <!-- Contact -->
+            <article id="contact">
+                <h2 class="major">OFFICE</h2>
+                <div style="height:600px;width:100%" id="map"></div>
+            </article>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <!-- <img style="height:90px; width:90px"class="icon fa-gem" src="images/logo.png" > -->
+            <p class="copyright">&copy; Tiffany.</p>
+        </footer>
+
+    </div>
+
+    <!-- BG -->
+    <div id="bg"></div>
+    <div class="homepage-hero-module">
+        <div class="video-container">
+            <div class="filter"></div>
+            <video autoplay loop muted playsinline src="videos/bg.mov" class="fillWidth"></video>
+            <div class="poster hidden">
+                <!-- <img src="PATH_TO_JPEG" alt=""> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="javascripts/js/jquery.min.js"></script>
+    <script src="javascripts/js/browser.min.js"></script>
+    <script src="javascripts/js/breakpoints.min.js"></script>
+    <script src="javascripts/js/util.js"></script>
+    <script src="javascripts/js/main.js"></script>
+    <script src="javascripts/my.js"></script>
+    <script src="javascripts/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe52uT5jSLafTstPaMPKuZEW9BfZ3O9m4&callback=initMap" async defer></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="javascripts/function.js"></script>
+</body>
+</html>

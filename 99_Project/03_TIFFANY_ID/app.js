@@ -6,12 +6,13 @@ var logger = require('morgan');
 const formidable = require('formidable');
 var fs = require('fs');
 const sequelize = require('./models').sequelize;
+require('dotenv').config();
 
 var app = express();
 sequelize.sync();
 
-// 세션 만료 시간을 1시간 후로 설정
-const expireDate = new Date(Date.now() + 60 * 60 * 1000);
+// 세션 만료 시간을 10분으로 설정
+const expireDate = new Date(Date.now() + 1 * 60 * 1000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,7 +43,7 @@ app.use('/logout', require('./routes/logout'));
 app.use('/photo_insert', require('./routes/photo_insert'));
 app.use('/modify', require('./routes/modify'));
 app.use('/member_delete', require('./routes/member_delete'));
-
+app.use('/recert', require('./routes/recert'));
 
 app.post('/upload', function (req, res) {    
   console.log("==========");

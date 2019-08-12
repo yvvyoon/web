@@ -34,11 +34,6 @@ router.post('/', function (req, res, next) {
         },
     })
         .then((rslt) => {
-            const secret = rslt.name;				//secret값을 rslt에서 name을 가져옴
-            const hash = crypto.createHmac('sha256', secret)		//login페이지에서 입력한 pwd를 해싱
-                .update(req.body.login_pwd)
-                .digest('hex');
-
             // ID 불일치
             if (rslt === null || rslt === undefined) {
                 loginResult.flag = 2;
@@ -48,6 +43,11 @@ router.post('/', function (req, res, next) {
 
                 return;
             } else if (rslt !== null && rslt !== undefined) {
+                const secret = rslt.name;				//secret값을 rslt에서 name을 가져옴
+                const hash = crypto.createHmac('sha256', secret)		//login페이지에서 입력한 pwd를 해싱
+                    .update(req.body.login_pwd)
+                    .digest('hex');
+
                 // ID 일치
                 if (rslt.loginLockYn === 'Y') {
                     loginResult.flag = 4;
@@ -117,8 +117,8 @@ router.post('/', function (req, res, next) {
                             }
 
                             let id_num_2nd = "";						//주민번호 뒷자리 1개를 추출
-                            for(let i=6;i<7;i++){
-                                id_num_2nd+=s_num[i];
+                            for (let i = 6; i < 7; i++) {
+                                id_num_2nd += s_num[i];
                             }
 
                             let id_num1 = rslt.identity_num;
@@ -128,7 +128,7 @@ router.post('/', function (req, res, next) {
                             let date = yy + "." + mm + "." + dd;
 
                             //main페이지에서 주민번호가 나오는 양식
-                            req.session.id_num = id_num +"-"+id_num_2nd +"******";
+                            req.session.id_num = id_num + "-" + id_num_2nd + "******";
                             req.session.id_num1 = date;
                             req.session.password = rslt.password;
                             req.session.phone = rslt.phone;
